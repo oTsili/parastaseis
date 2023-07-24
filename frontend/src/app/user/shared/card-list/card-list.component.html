@@ -1,0 +1,13 @@
+<div class="ui grid">
+  <div class="four wide column" *ngFor="let item of items">
+    <div class="ui card" (click)="navigateToLink(item)">
+      <div class="image">
+        <img [src]="item.image" />
+      </div>
+      <div class="content">
+        <div class="header">{{ item.title }}</div>
+        <div class="description">{{ item.description }}</div>
+      </div>
+    </div>
+  </div>
+</div>

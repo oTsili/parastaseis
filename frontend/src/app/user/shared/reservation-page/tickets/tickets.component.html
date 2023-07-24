@@ -1,0 +1,32 @@
+<div class="ui container table-wrapper">
+  <table class="ui striped table">
+    <thead>
+      <tr>
+        <th>Ημερομηνία</th>
+        <th>Τιμή</th>
+        <th>Διαθέσιμα</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ticket of concert.tickets">
+        <td>{{ ticket.time }} {{ ticket.date }}</td>
+        <td>{{ ticket.price }}</td>
+        <td>{{ ticket.seats }}</td>
+        <td class="ui center aligned">
+          <div
+            [class.error]="!isLoggedIn()"
+            class="ui massive teal button my-button"
+            (click)="buyTicket(concert, ticket)"
+          >
+            <!-- [routerLink]="['../shippingInformation', concert.title]" -->
+            Αγορά Εισιτηρίου
+          </div>
+          <div class="ui pointing red basic label" *ngIf="!isLoggedIn()">
+            Δεν είστε συνδεδεμένος.
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

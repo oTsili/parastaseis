@@ -1,0 +1,32 @@
+<nav>
+  <div class="ui menu">
+    <a id="home-button" routerLink="/">
+      <img src="assets/images/logo.webp" />
+    </a>
+    <div class="item">
+      <div
+        class="ui dropdown link item"
+        appDropdown
+        [dropdownVisible]="false"
+        *ngFor="let item of menuItems"
+      >
+        <span>{{ item.label }}</span>
+        <ul class="menu transition">
+          <div *ngFor="let subItem of item.subItems" class="item">
+            {{ subItem.label }}
+          </div>
+        </ul>
+      </div>
+      <div class="item link" routerLink="/theatre">θέατρο</div>
+      <div *ngIf="!isLoggedIn()" class="item link" routerLink="/login">
+        Login
+      </div>
+      <div *ngIf="isLoggedIn()" class="item link" routerLink="/login">
+        Logout
+      </div>
+      <div *ngIf="!isLoggedIn()" class="item link" routerLink="/signup">
+        Signup
+      </div>
+    </div>
+  </div>
+</nav>

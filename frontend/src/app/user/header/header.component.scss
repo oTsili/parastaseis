@@ -1,0 +1,26 @@
+.ui.menu {
+  font-size: 1.5rem;
+  justify-content: space-between;
+  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.075);
+}
+
+.ui.menu .item:before {
+  content: none;
+  // width: 0;
+}
+
+.ui.menu:after {
+  content: none;
+}
+
+#home-button {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  & img {
+    width: 7rem;
+    justify-self: flex-start;
+    flex: 1 0 auto;
+    padding-left: 3%;
+  }
+}

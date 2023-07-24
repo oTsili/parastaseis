@@ -1,0 +1,47 @@
+<app-header></app-header>
+<div class="ui middle aligned center aligned grid signup-form-wrapper">
+  <div class="column signup-form">
+    <h2 class="ui teal image header">
+      <div class="content">Sign up</div>
+    </h2>
+    <form class="ui large form">
+      <div class="ui stacked segment">
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="user icon"></i>
+            <input class="form-row" type="text" placeholder="Username" />
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="mail icon"></i>
+            <input class="form-row" type="email" placeholder="E-mail address" />
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="lock icon"></i>
+            <input class="form-row" type="password" placeholder="Password" />
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="lock icon"></i>
+            <input
+              class="form-row"
+              type="password"
+              placeholder="Confirm Password"
+            />
+          </div>
+        </div>
+        <div class="ui massive fluid large teal submit button">Sign Up</div>
+      </div>
+
+      <div class="ui error message"></div>
+    </form>
+    <div class="ui massive message">
+      Already have an account? <a routerLink="/login">Login</a>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>
