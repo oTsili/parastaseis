@@ -18,13 +18,25 @@
         </ul>
       </div>
       <div class="item link" routerLink="/theatre">θέατρο</div>
-      <div *ngIf="!isLoggedIn()" class="item link" routerLink="/login">
+      <div
+        *ngIf="!(isAuthenticated$ | async)"
+        class="item link"
+        routerLink="/login"
+      >
         Login
       </div>
-      <div *ngIf="isLoggedIn()" class="item link" routerLink="/login">
+      <div
+        *ngIf="isAuthenticated$ | async"
+        class="item link"
+        routerLink="/login"
+      >
         Logout
       </div>
-      <div *ngIf="!isLoggedIn()" class="item link" routerLink="/signup">
+      <div
+        *ngIf="!(isAuthenticated$ | async)"
+        class="item link"
+        routerLink="/signup"
+      >
         Signup
       </div>
     </div>

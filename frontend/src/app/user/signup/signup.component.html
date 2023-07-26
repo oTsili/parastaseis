@@ -4,37 +4,76 @@
     <h2 class="ui teal image header">
       <div class="content">Sign up</div>
     </h2>
-    <form class="ui large form">
+    <form [formGroup]="theSignupForm" class="ui large form">
       <div class="ui stacked segment">
         <div class="field">
           <div class="ui left icon input">
-            <i class="user icon"></i>
-            <input class="form-row" type="text" placeholder="Username" />
-          </div>
-        </div>
-        <div class="field">
-          <div class="ui left icon input">
             <i class="mail icon"></i>
-            <input class="form-row" type="email" placeholder="E-mail address" />
-          </div>
-        </div>
-        <div class="field">
-          <div class="ui left icon input">
-            <i class="lock icon"></i>
-            <input class="form-row" type="password" placeholder="Password" />
-          </div>
-        </div>
-        <div class="field">
-          <div class="ui left icon input">
-            <i class="lock icon"></i>
             <input
+              formControlName="username"
               class="form-row"
-              type="password"
-              placeholder="Confirm Password"
+              type="email"
+              placeholder="E-mail address"
             />
           </div>
         </div>
-        <div class="ui massive fluid large teal submit button">Sign Up</div>
+        <div class="field">
+          <div class="two fields">
+            <div class="field">
+              <div class="ui left icon input">
+                <i class="user icon"></i>
+                <input
+                  formControlName="firstName"
+                  class="form-row"
+                  type="text"
+                  placeholder="First Name"
+                />
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui left icon input">
+                <i class="user icon"></i>
+                <input
+                  formControlName="lastName"
+                  class="form-row"
+                  type="text"
+                  placeholder="Last Name"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <ng-container formGroupName="passwordsForm">
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="lock icon"></i>
+              <input
+                formControlName="password"
+                class="form-row"
+                type="password"
+                placeholder="Password"
+              />
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="lock icon"></i>
+              <input
+                formControlName="passwordConfirm"
+                class="form-row"
+                type="password"
+                placeholder="Confirm Password"
+              />
+            </div>
+          </div>
+        </ng-container>
+
+        <div
+          (click)="signup(theSignupForm)"
+          class="ui massive fluid large teal submit button"
+        >
+          Sign Up
+        </div>
       </div>
 
       <div class="ui error message"></div>

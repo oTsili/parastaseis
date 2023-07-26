@@ -20,15 +20,18 @@ export class UserController {
       loginDto.username,
       loginDto.password,
     );
+    console.log(loginDto);
     if (!user) {
       throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED);
     }
     const accessToken = this.authService.generateAccessToken(user);
+    console.log(user);
     return { accessToken };
   }
 
-  @Post('register')
+  @Post('signup')
   async register(@Body() createUserDto: CreateUserDto): Promise<User> {
+    console.log(createUserDto);
     const user = new this.authService.userModel(createUserDto);
     return user.save();
   }

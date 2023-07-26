@@ -4,6 +4,7 @@ import { LoginComponent } from './login.component';
 import { RouterModule } from '@angular/router';
 import { HeaderModule } from '../header/header.module';
 import { FooterModule } from '../footer/footer.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [LoginComponent],
@@ -11,6 +12,7 @@ import { FooterModule } from '../footer/footer.module';
     CommonModule,
     HeaderModule,
     FooterModule,
+    ReactiveFormsModule,
     RouterModule.forChild([
       {
         path: '',

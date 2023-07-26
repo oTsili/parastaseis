@@ -1,6 +1,7 @@
 import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
-import { AuthService } from '../login/auth.service';
+import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 // import { MenuItem } from 'primeng/api';
 
 interface MenuItem {
@@ -15,18 +16,22 @@ interface MenuItem {
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+  isAuthenticated$: BehaviorSubject<boolean>;
+
   constructor(
     private authService: AuthService,
     private router: Router,
     private elementRef: ElementRef
-  ) {}
-
-  isLoggedIn(): boolean {
-    return this.authService.isLoggedIn();
+  ) {
+    this.isAuthenticated$ = this.authService.isAuthenticated$;
   }
 
+  // isLoggedIn(): boolean {
+  //   // return this.authService.isLoggedIn();
+  // }
+
   logout() {
-    this.authService.logout();
+    // this.authService.logout();
     this.router.navigate(['/login']);
   }
   menuItems: MenuItem[] = [
