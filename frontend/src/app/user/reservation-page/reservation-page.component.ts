@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Concert } from '../multi-item-carousel/multi-item-carousel.interface';
-import { Ticket } from '../multi-item-carousel/Ticket.interface';
+import { Concert } from '../shared/multi-item-carousel/multi-item-carousel.interface';
+import { Ticket } from '../shared/multi-item-carousel/Ticket.interface';
 
 @Component({
   selector: 'app-reservation-page',

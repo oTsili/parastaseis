@@ -91,10 +91,25 @@ export class AuthService {
       );
   }
 
-  // logout() {
-  //   this.token = '';
-  //   this.isAuthenticated = false;
-  // }
+  onLogout() {
+    return this.httpClient
+      .get<void>(`${BACKEND_URL}/logout`, {
+        withCredentials: true,
+      })
+      .pipe(
+        tap(() => {
+          // update the isAuthenticated variable with false (LOGOUT)
+          // inform the observers that the user's account information are NOT available
+          this.onUpdateAuthStatus(false);
+        })
+      )
+      .pipe(
+        map((userData) => {
+          // console.log({ userData });
+          return userData;
+        })
+      );
+  }
 
   /**
    * @returns User object if isAuthenticated is true or 401 error status

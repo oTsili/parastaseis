@@ -12,7 +12,7 @@
           <div class="ui left icon input">
             <i class="mail icon"></i>
             <input
-              formControlName="email"
+              formControlName="username"
               class="form-row"
               type="email"
               placeholder="E-mail address"
@@ -40,13 +40,10 @@
       </div>
 
       <div
-        *ngIf="
-          theLoginForm.get('username')!.invalid ||
-          theLoginForm.get('password')!.invalid
-        "
+        *ngIf="(theLoginForm.invalid && isSubmitted) || errorReturned"
         class="ui error message"
       >
-        Το username ή το password δεν υπάρχουν
+        Λάθος username ή password!!
       </div>
     </form>
 

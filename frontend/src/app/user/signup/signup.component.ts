@@ -15,6 +15,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   theSignupForm: FormGroup;
   signupDate: string;
   signupSubscription: Subscription;
+  isSubmitted: boolean;
 
   constructor(
     private appService: AppService,
@@ -54,6 +55,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
 
   signup(form: FormGroup) {
+    this.isSubmitted = true;
     console.log(form);
     if (form.invalid) {
       console.log('invalid form');

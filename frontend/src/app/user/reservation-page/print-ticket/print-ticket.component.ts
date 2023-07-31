@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Concert } from '../../multi-item-carousel/multi-item-carousel.interface';
+import { Concert } from '../../shared/multi-item-carousel/multi-item-carousel.interface';
 
 @Component({
   selector: 'app-print-ticket',

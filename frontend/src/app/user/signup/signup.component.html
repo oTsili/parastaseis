@@ -6,7 +6,12 @@
     </h2>
     <form [formGroup]="theSignupForm" class="ui large form">
       <div class="ui stacked segment">
-        <div class="field">
+        <div
+          class="field"
+          [ngClass]="{
+            error: theSignupForm.get('username')!.invalid && isSubmitted
+          }"
+        >
           <div class="ui left icon input">
             <i class="mail icon"></i>
             <input
@@ -19,7 +24,12 @@
         </div>
         <div class="field">
           <div class="two fields">
-            <div class="field">
+            <div
+              class="field"
+              [ngClass]="{
+                error: theSignupForm.get('firstName')!.invalid && isSubmitted
+              }"
+            >
               <div class="ui left icon input">
                 <i class="user icon"></i>
                 <input
@@ -30,7 +40,12 @@
                 />
               </div>
             </div>
-            <div class="field">
+            <div
+              class="field"
+              [ngClass]="{
+                error: theSignupForm.get('lastName')!.invalid && isSubmitted
+              }"
+            >
               <div class="ui left icon input">
                 <i class="user icon"></i>
                 <input
@@ -44,7 +59,14 @@
           </div>
         </div>
         <ng-container formGroupName="passwordsForm">
-          <div class="field">
+          <div
+            class="field"
+            [ngClass]="{
+              error:
+                theSignupForm.get('passwordsForm.password')!.invalid &&
+                isSubmitted
+            }"
+          >
             <div class="ui left icon input">
               <i class="lock icon"></i>
               <input
@@ -55,7 +77,14 @@
               />
             </div>
           </div>
-          <div class="field">
+          <div
+            class="field"
+            [ngClass]="{
+              error:
+                theSignupForm.get('passwordsForm.passwordConfirm')!.invalid &&
+                isSubmitted
+            }"
+          >
             <div class="ui left icon input">
               <i class="lock icon"></i>
               <input
@@ -76,7 +105,12 @@
         </div>
       </div>
 
-      <div class="ui error message"></div>
+      <div
+        *ngIf="theSignupForm.invalid && isSubmitted"
+        class="ui error message"
+      >
+        Υπάρχει κάποιο λάθος στη φόρμα!!
+      </div>
     </form>
     <div class="ui massive message">
       Already have an account? <a routerLink="/login">Login</a>

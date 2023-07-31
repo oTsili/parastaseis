@@ -1,10 +1,22 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import * as session from 'express-session';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.setGlobalPrefix('api');
+
+  app.use(
+    session({
+      secret: 'my-secret',
+      resave: false,
+      saveUninitialized: false,
+      // cookie: {
+      //   maxAge: parseInt(process.env.MAX_AGE),
+      // },
+    }),
+  );
 
   app.enableCors({
     origin: 'http://localhost:4300',

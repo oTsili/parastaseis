@@ -15,12 +15,14 @@ export class LoginComponent implements OnInit, OnDestroy {
   message: string = '';
   theLoginForm: FormGroup;
   loginSubscription: Subscription;
+  isSubmitted: boolean;
+  errorReturned = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.theLoginForm = new FormGroup({
-      email: new FormControl(null, {
+      username: new FormControl(null, {
         validators: [Validators.required, Validators.email],
       }),
       password: new FormControl(null, {
@@ -36,22 +38,25 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   login(form: FormGroup) {
-    console.log(form);
+    this.isSubmitted = true;
+
     if (form.invalid) {
       console.log('form invalid');
       return;
     }
     // this.isLoading = true;
     this.loginSubscription = this.authService
-      .onLogin(form.value.email, form.value.password)
+      .onLogin(form.value.username, form.value.password)
       .subscribe({
         next: (response) => {
+          this.errorReturned = false;
           console.log({ response });
           // localStorage.setItem('user', JSON.stringify(response));
         },
         error: (error) => {
           // console.log(error);
           let errorMessage = error.error.message;
+          this.errorReturned = true;
           // .split(':')[1].trim();
           console.log(errorMessage);
         },

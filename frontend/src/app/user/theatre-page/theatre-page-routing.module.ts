@@ -19,7 +19,7 @@ const routes: Routes = [
   {
     path: 'reservation',
     loadChildren: () =>
-      import('../shared/reservation-page/reservation-page.module').then(
+      import('../reservation-page/reservation-page.module').then(
         (m) => m.ReservationPageModule
       ),
     data: {

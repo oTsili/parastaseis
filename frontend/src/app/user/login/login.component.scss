@@ -11,7 +11,7 @@
 .login-form {
   // font-size: 3.5rem;
   width: 46% !important;
-  height: 50%;
+  height: 58%;
   border: solid;
   border-color: #f0a2bc6e;
   border-radius: 2%;
@@ -62,4 +62,12 @@ h2.ui.header {
 
 .ui.teal.header {
   color: #f0a2bc !important;
+}
+
+.ui.error.message {
+  display: block;
+}
+
+.ui.message {
+  font-size: 1.5rem;
 }

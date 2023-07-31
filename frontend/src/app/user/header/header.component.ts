@@ -1,7 +1,13 @@
-import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 // import { MenuItem } from 'primeng/api';
 
 interface MenuItem {
@@ -15,8 +21,9 @@ interface MenuItem {
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   isAuthenticated$: BehaviorSubject<boolean>;
+  authSubscription: Subscription;
 
   constructor(
     private authService: AuthService,
@@ -26,14 +33,53 @@ export class HeaderComponent implements OnInit {
     this.isAuthenticated$ = this.authService.isAuthenticated$;
   }
 
+  ngOnInit(): void {
+    this.checkAuth();
+  }
+
+  ngOnDestroy(): void {
+    this.authSubscription.unsubscribe();
+  }
+  isOpen = false;
+
+  @HostListener('document:click', ['$event.target'])
+  onClickOutside(targetElement: any) {
+    const clickedInside = this.elementRef.nativeElement.contains(targetElement);
+    this.isOpen = clickedInside;
+  }
+
+  @HostListener('mouseenter', ['$event'])
+  onMouseEnter(event: MouseEvent) {
+    this.isOpen = true;
+  }
+
+  @HostListener('mouseleave', ['$event'])
+  onMouseLeave(event: MouseEvent) {
+    this.isOpen = false;
+  }
+
+  toggleDropdown(item: MenuItem) {
+    item.isDropdownOpen = !item.isDropdownOpen;
+  }
+
   // isLoggedIn(): boolean {
   //   // return this.authService.isLoggedIn();
   // }
 
   logout() {
-    // this.authService.logout();
+    this.authService.onLogout().subscribe({});
     this.router.navigate(['/login']);
   }
+
+  checkAuth() {
+    console.log('testAuth');
+    this.authSubscription = this.authService
+      .isAuthenticated()
+      .subscribe((response) => {
+        console.log(response);
+      });
+  }
+
   menuItems: MenuItem[] = [
     {
       label: 'Menu 1',
@@ -72,28 +118,4 @@ export class HeaderComponent implements OnInit {
       ],
     },
   ];
-
-  toggleDropdown(item: MenuItem) {
-    item.isDropdownOpen = !item.isDropdownOpen;
-  }
-
-  ngOnInit(): void {}
-
-  isOpen = false;
-
-  @HostListener('document:click', ['$event.target'])
-  onClickOutside(targetElement: any) {
-    const clickedInside = this.elementRef.nativeElement.contains(targetElement);
-    this.isOpen = clickedInside;
-  }
-
-  @HostListener('mouseenter', ['$event'])
-  onMouseEnter(event: MouseEvent) {
-    this.isOpen = true;
-  }
-
-  @HostListener('mouseleave', ['$event'])
-  onMouseLeave(event: MouseEvent) {
-    this.isOpen = false;
-  }
 }
