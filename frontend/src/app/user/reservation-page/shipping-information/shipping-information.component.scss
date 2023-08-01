@@ -52,3 +52,11 @@ input,
 .my-button:focus {
   color: #ffffff;
 }
+
+.ui.error.message {
+  display: block;
+}
+
+.ui.message {
+  font-size: 1.5rem;
+}

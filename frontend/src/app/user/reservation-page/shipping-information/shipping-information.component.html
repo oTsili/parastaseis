@@ -3,7 +3,12 @@
   <div class="field">
     <label>Όνομα</label>
     <div class="two fields">
-      <div class="field">
+      <div
+        class="field"
+        [ngClass]="{
+          error: shippingForm.get('firstname')!.invalid && isSubmitted
+        }"
+      >
         <input
           type="text"
           formControlName="firstname"
@@ -11,7 +16,12 @@
           placeholder="Όνομα"
         />
       </div>
-      <div class="field">
+      <div
+        class="field"
+        [ngClass]="{
+          error: shippingForm.get('lastname')!.invalid && isSubmitted
+        }"
+      >
         <input
           type="text"
           formControlName="lastname"
@@ -24,7 +34,12 @@
   <div class="field">
     <label>Διεύθυνση Αποστολής</label>
     <div class="fields">
-      <div class="twelve wide field">
+      <div
+        class="twelve wide field"
+        [ngClass]="{
+          error: shippingForm.get('shippingAddress')!.invalid && isSubmitted
+        }"
+      >
         <input
           type="text"
           formControlName="shippingAddress"
@@ -32,7 +47,12 @@
           placeholder="Διεύθυνση"
         />
       </div>
-      <div class="four wide field">
+      <div
+        class="four wide field"
+        [ngClass]="{
+          error: shippingForm.get('postalCode')!.invalid && isSubmitted
+        }"
+      >
         <input
           type="text"
           formControlName="postalCode"
@@ -43,7 +63,12 @@
     </div>
   </div>
   <div class="fields">
-    <div class="twelve wide field">
+    <div
+      class="twelve wide field"
+      [ngClass]="{
+        error: shippingForm.get('shippingCity')!.invalid && isSubmitted
+      }"
+    >
       <input
         type="text"
         formControlName="shippingCity"
@@ -51,7 +76,12 @@
         placeholder="Περιφέρεια"
       />
     </div>
-    <div class="four wide field">
+    <div
+      class="four wide field"
+      [ngClass]="{
+        error: shippingForm.get('shippingTown')!.invalid && isSubmitted
+      }"
+    >
       <input
         type="text"
         formControlName="shippingTown"
@@ -62,7 +92,12 @@
   </div>
 
   <h4 class="ui dividing header">Στοιχεία Πληρωμής</h4>
-  <div class="field">
+  <div
+    class="field"
+    [ngClass]="{
+      error: shippingForm.get('cardType')!.invalid && isSubmitted
+    }"
+  >
     <label>Κάρτα</label>
     <div
       class="ui selection dropdown"
@@ -96,7 +131,12 @@
     </div>
   </div>
   <div class="fields">
-    <div class="seven wide field">
+    <div
+      class="seven wide field"
+      [ngClass]="{
+        error: shippingForm.get('cardNumber')!.invalid && isSubmitted
+      }"
+    >
       <label>Αριθμός Κάρτας</label>
       <input
         type="text"
@@ -106,7 +146,12 @@
         placeholder="Κάρτα #"
       />
     </div>
-    <div class="three wide field">
+    <div
+      class="three wide field"
+      [ngClass]="{
+        error: shippingForm.get('cardCvc')!.invalid && isSubmitted
+      }"
+    >
       <label>CVC</label>
       <input
         type="text"
@@ -119,8 +164,20 @@
     <div class="six wide field">
       <label>Λήξη</label>
       <div class="two fields">
-        <div class="field">
-          <select class="ui fluid search dropdown" name="card[expire-month]">
+        <div
+          class="field"
+          [ngClass]="{
+            error:
+              shippingForm.get('expirationDate')!.invalid &&
+              isSubmitted &&
+              !cardMonth.value
+          }"
+        >
+          <select
+            #cardMonth
+            class="ui fluid search dropdown"
+            name="card[expire-month]"
+          >
             <option value="">Μήνας</option>
             <option value="1">Ιανουάριος</option>
             <option value="2">Φεβρουάριος</option>
@@ -136,7 +193,12 @@
             <option value="12">Δεκέμβριος</option>
           </select>
         </div>
-        <div class="field">
+        <div
+          class="field"
+          [ngClass]="{
+            error: shippingForm.get('expirationDate')!.invalid && isSubmitted
+          }"
+        >
           <input
             type="text"
             formControlName="expirationDate"
@@ -169,21 +231,39 @@
         <label>Ίδια με τα στοιχεία αποστολής</label>
       </div>
     </div>
-    <div class="field">
+    <div
+      class="field"
+      [ngClass]="{
+        error:
+          (shippingForm.get('receiptFirstname')!.invalid &&
+            isSubmitted &&
+            !isChecked) ||
+          (isSubmitted && isChecked && shippingForm.get('firstname')!.invalid)
+      }"
+    >
       <label>Όνομα</label>
       <div class="two fields">
         <div class="field">
           <input
-            [disabled]="isChecked"
             type="text"
-            formControlName="receiptUsername"
+            formControlName="receiptFirstname"
             name="receipt[first-name]"
             placeholder="Όνομα"
           />
         </div>
-        <div class="field">
+        <div
+          class="field"
+          [ngClass]="{
+            error:
+              (shippingForm.get('receiptLastname')!.invalid &&
+                isSubmitted &&
+                !isChecked) ||
+              (isSubmitted &&
+                isChecked &&
+                shippingForm.get('lastname')!.invalid)
+          }"
+        >
           <input
-            [disabled]="isChecked"
             type="text"
             formControlName="receiptLastname"
             name="receipt[last-name]"
@@ -195,18 +275,38 @@
     <div class="field">
       <label>Στοιχεία Αποστολής</label>
       <div class="fields">
-        <div class="twelve wide field">
+        <div
+          class="twelve wide field"
+          [ngClass]="{
+            error:
+              (shippingForm.get('receiptAddress')!.invalid &&
+                isSubmitted &&
+                !isChecked) ||
+              (isSubmitted &&
+                isChecked &&
+                shippingForm.get('shippingAddress')!.invalid)
+          }"
+        >
           <input
-            [disabled]="isChecked"
             type="text"
             formControlName="receiptAddress"
             name="receipt[address]"
             placeholder="Διεύθυνση"
           />
         </div>
-        <div class="four wide field">
+        <div
+          class="four wide field"
+          [ngClass]="{
+            error:
+              (shippingForm.get('receiptPostalcode')!.invalid &&
+                isSubmitted &&
+                !isChecked) ||
+              (isSubmitted &&
+                isChecked &&
+                shippingForm.get('postalCode')!.invalid)
+          }"
+        >
           <input
-            [disabled]="isChecked"
             type="text"
             formControlName="receiptPostalcode"
             name="receipt[address-2]"
@@ -216,18 +316,38 @@
       </div>
     </div>
     <div class="fields">
-      <div class="twelve wide field">
+      <div
+        class="twelve wide field"
+        [ngClass]="{
+          error:
+            (shippingForm.get('receiptCity')!.invalid &&
+              isSubmitted &&
+              !isChecked) ||
+            (isSubmitted &&
+              isChecked &&
+              shippingForm.get('shippingCity')!.invalid)
+        }"
+      >
         <input
-          [disabled]="isChecked"
           type="text"
           formControlName="receiptCity"
           name="receipt[city]"
           placeholder="Περιφέρεια"
         />
       </div>
-      <div class="four wide field">
+      <div
+        class="four wide field"
+        [ngClass]="{
+          error:
+            (shippingForm.get('receiptTown')!.invalid &&
+              isSubmitted &&
+              !isChecked) ||
+            (isSubmitted &&
+              isChecked &&
+              shippingForm.get('shippingTown')!.invalid)
+        }"
+      >
         <input
-          [disabled]="isChecked"
           type="text"
           formControlName="receiptTown"
           name="receipt[town]"
@@ -247,5 +367,11 @@
     >
       Αγορά
     </div>
+  </div>
+  <div
+    *ngIf="(shippingForm.invalid && isSubmitted) || errorReturned"
+    class="ui error message"
+  >
+    Υπάρχουν κάποια λάθη!!
   </div>
 </form>

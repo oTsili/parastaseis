@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       console.log('form invalid');
       return;
     }
+
     // this.isLoading = true;
     this.loginSubscription = this.authService
       .onLogin(form.value.username, form.value.password)

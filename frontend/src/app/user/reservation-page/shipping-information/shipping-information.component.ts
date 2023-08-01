@@ -2,7 +2,13 @@ import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { Concert } from '../../shared/multi-item-carousel/multi-item-carousel.interface';
 import { Router } from '@angular/router';
 import { Ticket } from '../../shared/multi-item-carousel/Ticket.interface';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ShippingInformationService } from './shipping-information.service';
 
@@ -18,7 +24,7 @@ export interface Shipping {
   cardCvc: string;
   expirationDate: string;
   asShipping: boolean;
-  receiptUsername: string;
+  receiptFirstname: string;
   receiptLastname: string;
   receiptAddress: string;
   receiptPostalcode: string;
@@ -36,6 +42,8 @@ export class ShippingInformationComponent {
   @ViewChild('cardTypeText') cardTypeText: ElementRef;
   @ViewChild('checkInput') checkInput: ElementRef;
   @ViewChild('shippingTown') town: ElementRef;
+  @ViewChild('cardMonth') cardMonth: ElementRef<HTMLSelectElement>;
+
   isOpen = false;
   isChecked = false;
   concert: Concert;
@@ -51,6 +59,7 @@ export class ShippingInformationComponent {
   shippingForm: FormGroup;
   isSubmitted = false;
   submitSubsciption: Subscription;
+  errorReturned = false;
 
   constructor(
     private renderer: Renderer2,
@@ -97,31 +106,29 @@ export class ShippingInformationComponent {
       asShipping: new FormControl(false, {
         validators: [Validators.required],
       }),
-      receiptUsername: new FormControl(null, {
-        validators: [],
+      receiptFirstname: new FormControl(null, {
+        validators: [Validators.required],
       }),
       receiptLastname: new FormControl(null, {
-        validators: [],
+        validators: [Validators.required],
       }),
       receiptAddress: new FormControl(null, {
-        validators: [],
+        validators: [Validators.required],
       }),
       receiptPostalcode: new FormControl(null, {
-        validators: [],
+        validators: [Validators.required],
       }),
       receiptCity: new FormControl(null, {
-        validators: [],
+        validators: [Validators.required],
       }),
       receiptTown: new FormControl(null, {
-        validators: [],
+        validators: [Validators.required],
       }),
     });
   }
 
   submit(form: FormGroup) {
     this.isSubmitted = true;
-    console.log(form);
-    console.log(this.town);
 
     if (form.invalid) {
       console.log('form invalid');
@@ -138,9 +145,9 @@ export class ShippingInformationComponent {
       cardType: form.value.cardType,
       cardNumber: form.value.cardNumber,
       cardCvc: form.value.cardCvc,
-      expirationDate: form.value.expirationDate,
+      expirationDate: `${this.cardMonth.nativeElement.value}/${form.value.expirationDate}`,
       asShipping: this.isChecked,
-      receiptUsername: form.value.receiptUsername,
+      receiptFirstname: form.value.receiptFirstname,
       receiptLastname: form.value.receiptLastname,
       receiptAddress: form.value.receiptAddress,
       receiptPostalcode: form.value.receiptPostalcode,
@@ -150,15 +157,13 @@ export class ShippingInformationComponent {
 
     // if asShipping button is checked, then assign the shipping values to the receipt values
     if (this.isChecked) {
-      shipping.receiptUsername = shipping.firstname;
+      shipping.receiptFirstname = shipping.firstname;
       shipping.receiptLastname = shipping.lastName;
       shipping.receiptAddress = shipping.shippingAddress;
       shipping.receiptPostalcode = shipping.postalCode;
       shipping.receiptCity = shipping.shippingCity;
       shipping.receiptTown = shipping.shippingTown;
     }
-
-    console.log(shipping);
 
     // this.isLoading = true;
     this.submitSubsciption = this.shippingInformationService
@@ -171,6 +176,7 @@ export class ShippingInformationComponent {
         error: (error) => {
           // console.log(error);
           let errorMessage = error.error.message;
+          this.errorReturned = true;
           // .split(':')[1].trim();
           console.log(errorMessage);
         },
@@ -184,6 +190,22 @@ export class ShippingInformationComponent {
 
   toggleChecked() {
     this.isChecked = !this.isChecked;
+
+    if (this.isChecked) {
+      this.shippingForm.get('receiptFirstname')?.disable();
+      this.shippingForm.get('receiptLastname')?.disable();
+      this.shippingForm.get('receiptAddress')?.disable();
+      this.shippingForm.get('receiptPostalcode')?.disable();
+      this.shippingForm.get('receiptCity')?.disable();
+      this.shippingForm.get('receiptTown')?.disable();
+    } else {
+      this.shippingForm.get('receiptFirstname')?.enable();
+      this.shippingForm.get('receiptLastname')?.enable();
+      this.shippingForm.get('receiptAddress')?.enable();
+      this.shippingForm.get('receiptPostalcode')?.enable();
+      this.shippingForm.get('receiptCity')?.enable();
+      this.shippingForm.get('receiptTown')?.enable();
+    }
   }
 
   previous() {
