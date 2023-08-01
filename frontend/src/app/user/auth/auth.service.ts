@@ -132,8 +132,8 @@ export class AuthService {
       .pipe(
         map((userData) => {
           const user = {
-            id: userData.userId,
-            email: userData.email,
+            // id: userData.userId,
+            // email: userData.email,
             // account: userData.account,
           };
           // save user info to the browser's storage

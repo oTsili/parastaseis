@@ -171,6 +171,8 @@ export class ShippingInformationComponent {
       .subscribe({
         next: (response) => {
           console.log({ response });
+
+          this.printTicket(this.concert, this.ticket);
           // localStorage.setItem('user', JSON.stringify(response));
         },
         error: (error) => {
@@ -230,5 +232,11 @@ export class ShippingInformationComponent {
       'color',
       'rgba(0, 0, 0, 0.87)'
     );
+  }
+
+  printTicket(concert: Concert, ticket: Ticket) {
+    this.router.navigate(['/theatre/reservation/printTicket'], {
+      state: { data: { concert: this.concert, ticket } },
+    });
   }
 }

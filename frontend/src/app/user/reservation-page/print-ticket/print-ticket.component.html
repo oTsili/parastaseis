@@ -1,1 +1,31 @@
-<p>print-ticket works!</p>
+<div class="ui container">
+  <div class="ticket-wrapper">
+    <div class="ticket">
+      <div class="ticket-header">
+        <h1 class="ticket-title">Concert Ticket</h1>
+      </div>
+      <div class="ticket-body">
+        <div class="ticket-details">
+          <div class="event-info">
+            <p><strong>Event:</strong> My Awesome Concert</p>
+            <p><strong>Date:</strong> 15th August 2023</p>
+            <p><strong>Location:</strong> Concert Hall, City</p>
+          </div>
+          <div class="ticket-number">
+            <p>Ticket No: 123456789</p>
+          </div>
+        </div>
+        <div class="ticket-barcode">
+          <!-- Add barcode or QR code here -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="button-wrapper">
+    <div class="ui row">
+      <button class="ui massive button" (click)="downloadPDF()">
+        Download Ticket
+      </button>
+    </div>
+  </div>
+</div>
