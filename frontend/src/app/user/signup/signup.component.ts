@@ -5,6 +5,7 @@ import { RetypeConfirm } from 'src/app/validators/password-confirm.validator';
 import { SignupAuthData } from './signup.interface';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -19,7 +20,8 @@ export class SignupComponent implements OnInit, OnDestroy {
 
   constructor(
     private appService: AppService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -82,6 +84,7 @@ export class SignupComponent implements OnInit, OnDestroy {
       {
         next: (c) => {
           console.log(c);
+          this.router.navigate(['/']);
           // this.userAppService.onToggleModal();
         },
       }

@@ -77,7 +77,15 @@ export class UserController {
   async registerShipping(@Body() createShippingDto: CreateShippingDto) {
     console.log(createShippingDto);
     const shipping = new this.userService.shippingModel(createShippingDto);
+    // Create a new object with only the desired properties
+    const responseObj = {
+      property1: shipping.firstname,
+      property2: shipping.lastName,
+    };
 
-    return shipping.save();
+    // Save the shipping object
+    await shipping.save();
+
+    return responseObj; // Send the filtered object to the frontend
   }
 }

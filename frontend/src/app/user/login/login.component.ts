@@ -52,6 +52,8 @@ export class LoginComponent implements OnInit, OnDestroy {
         next: (response) => {
           this.errorReturned = false;
           console.log({ response });
+          this.router.navigate(['/']);
+
           // localStorage.setItem('user', JSON.stringify(response));
         },
         error: (error) => {
