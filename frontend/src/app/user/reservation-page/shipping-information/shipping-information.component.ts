@@ -2,13 +2,7 @@ import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { Concert } from '../../shared/multi-item-carousel/multi-item-carousel.interface';
 import { Router } from '@angular/router';
 import { Ticket } from '../../shared/multi-item-carousel/Ticket.interface';
-import {
-  AbstractControl,
-  FormControl,
-  FormGroup,
-  ValidatorFn,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ShippingInformationService } from './shipping-information.service';
 
@@ -135,7 +129,7 @@ export class ShippingInformationComponent {
       return;
     }
 
-    const shipping = {
+    const shipping: Shipping = {
       firstname: form.value.firstname,
       lastName: form.value.lastname,
       shippingAddress: form.value.shippingAddress,
@@ -172,7 +166,7 @@ export class ShippingInformationComponent {
         next: (response) => {
           console.log({ response });
 
-          this.printTicket(this.concert, this.ticket);
+          this.printTicket(this.concert, this.ticket, response);
           // localStorage.setItem('user', JSON.stringify(response));
         },
         error: (error) => {
@@ -234,9 +228,9 @@ export class ShippingInformationComponent {
     );
   }
 
-  printTicket(concert: Concert, ticket: Ticket) {
+  printTicket(concert: Concert, ticket: Ticket, userInformation: Shipping) {
     this.router.navigate(['/theatre/reservation/printTicket'], {
-      state: { data: { concert: this.concert, ticket } },
+      state: { data: { concert: this.concert, ticket, userInformation } },
     });
   }
 }

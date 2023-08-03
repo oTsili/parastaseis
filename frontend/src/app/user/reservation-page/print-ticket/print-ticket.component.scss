@@ -16,7 +16,8 @@
 }
 
 .ticket {
-  width: 300px;
+  width: 50rem;
+  height: 50rem;
   background-color: #fff;
   border: 1px solid #ccc;
   padding: 15px;
@@ -49,4 +50,10 @@
 
 .ticket-number {
   width: 30%;
+}
+
+.right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
