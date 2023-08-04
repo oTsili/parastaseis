@@ -1,0 +1,28 @@
+/* picture-upload.component.css */
+.ui.segment {
+  max-width: 400px;
+  margin: 50px auto;
+}
+
+.ui.header {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.ui.action.input {
+  display: flex;
+  align-items: center;
+}
+
+.ui.action.input input[type="file"] {
+  display: none;
+}
+
+.ui.primary.button {
+  margin-left: 10px;
+}
+
+.ui.message {
+  margin-top: 1rem;
+  padding: 10px;
+}

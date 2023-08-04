@@ -1,1 +1,36 @@
-<p>admin works!</p>
+<div class="container">
+  <div class="ui top attached demo menu">
+    <a (click)="toggleVisibility()" class="item">
+      <i class="sidebar icon"></i>
+      Menu
+    </a>
+  </div>
+  <div class="ui bottom attached segment pushable">
+    <div
+      [ngClass]="{ uncover: isOpen, visible: isOpen }"
+      class="ui inverted labeled icon left inline vertical sidebar menu"
+    >
+      <a routerLink="/admin/home" class="item">
+        <i class="home icon"></i>
+        Home
+      </a>
+      <a routerLink="/admin/movies" class="item">
+        <i class="film icon"></i>
+        Ταινίες
+      </a>
+      <a routerLink="/admin/music" class="item">
+        <i class="music icon"></i>
+        Μουσική
+      </a>
+      <a routerLink="/admin/theatre" class="item">
+        <i class="smile icon"></i>
+        Θέατρο
+      </a>
+    </div>
+    <div class="pusher" [ngClass]="{ dimmer: isOpen }">
+      <div class="ui basic segment">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

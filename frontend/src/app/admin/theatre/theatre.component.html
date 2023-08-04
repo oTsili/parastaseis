@@ -1,0 +1,16 @@
+<!-- picture-upload.component.html -->
+<div class="ui segment">
+  <div class="ui header">Upload Picture</div>
+  <div class="ui action input">
+    <input #fileInput type="file" (change)="onFileChange($event)" />
+    <button
+      class="ui primary button"
+      (click)="triggerFileInput()"
+    >
+      Upload
+    </button>
+  </div>
+  <div class="ui message" *ngIf="fileSelected">
+    <p>File selected: {{ selectedFileName }}</p>
+  </div>
+</div>
