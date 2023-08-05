@@ -5,7 +5,7 @@ import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserModule } from './app/user/user.module';
-import { FileController } from './app/admin/file/file.controller';
+import { FileController } from './app/admin/theatre/theatre.controller';
 
 @Module({
   imports: [

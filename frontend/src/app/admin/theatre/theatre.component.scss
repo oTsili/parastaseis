@@ -35,3 +35,24 @@
   max-width: none;
   margin: 0;
 }
+
+.container {
+  margin-top: 3rem;
+}
+
+.ui.button,
+.ui.search,
+.ui.form textarea,
+.ui.form input[type="text"],
+.ui.form input[type="number"],
+.ui.form .field > label {
+  font-size: 1.2rem;
+}
+
+.ui.dividing.header {
+  width: 75%;
+}
+
+.button-wrapper {
+  margin-top: 3%;
+}

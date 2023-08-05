@@ -11,12 +11,40 @@ const BACKEND_URL = environment.BASE_URL + '/admin';
 export class TheatreService {
   constructor(private httpClient: HttpClient) {}
 
-  onUploadPicture(selectedFile: any, selectedFileName: string) {
-    console.log(selectedFile);
-    console.log(selectedFileName);
+  onSubmit(event: any) {
+    const {
+      title,
+      category,
+      url,
+      description,
+      date,
+      location,
+      coverImage,
+      simpleImage,
+    } = event;
+
+    console.log(
+      title,
+      category,
+      url,
+      description,
+      date,
+      location,
+      coverImage,
+      simpleImage
+    );
+
     const formData = new FormData();
-    formData.append('file', selectedFile as File, selectedFileName);
-    // formData.append('file', selectedFile, selectedFileName);
+    formData.append('title', title);
+    formData.append('category', category);
+    formData.append('url', url);
+    formData.append('description', description);
+    formData.append('date', date);
+    formData.append('location', location);
+
+    formData.append('files', coverImage as File, `cover_${coverImage.name}`);
+    formData.append('files', simpleImage as File, `simple_${simpleImage.name}`);
+
     // let headers = new Headers();
     // /** No need to include Content-Type in Angular 4 */
     // headers.append('Content-Type', 'multipart/form-data');
@@ -24,7 +52,7 @@ export class TheatreService {
     // let options = new RequestOptions({ headers: headers });
     console.log(formData);
     return this.httpClient
-      .post<any>(`${BACKEND_URL}/file/upload`, formData, {
+      .post<any>(`${BACKEND_URL}/theatre`, formData, {
         withCredentials: true,
       })
       .pipe(
