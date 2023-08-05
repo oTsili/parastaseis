@@ -1,16 +1,212 @@
-<!-- picture-upload.component.html -->
-<div class="ui segment">
-  <div class="ui header">Upload Picture</div>
-  <div class="ui action input">
-    <input #fileInput type="file" (change)="onFileChange($event)" />
-    <button
-      class="ui primary button"
-      (click)="triggerFileInput()"
+<form [formGroup]="theatreForm" class="ui form">
+  <h4 class="ui dividing header">Στοιχεία Event</h4>
+  <div class="field">
+    <label>Τίτλος</label>
+    <div class="fields">
+      <div
+        class="four wide field"
+        [ngClass]="{
+          error:
+            theatreForm.get('title')!.invalid &&
+            (theatreForm.get('title')!.dirty ||
+              theatreForm.get('title')!.touched)
+        }"
+      >
+        <input
+          type="text"
+          formControlName="title"
+          name="title"
+          placeholder="Τίτλος"
+        />
+      </div>
+      <div
+        class="four wide field"
+        [ngClass]="{
+          error:
+            theatreForm.get('category')!.invalid &&
+            (theatreForm.get('category')!.dirty ||
+              theatreForm.get('category')!.touched)
+        }"
+      >
+        <input
+          type="text"
+          formControlName="category"
+          name="category"
+          placeholder="Κατηγορία"
+        />
+      </div>
+      <div
+        class="four wide field"
+        [ngClass]="{
+          error:
+            theatreForm.get('url')!.invalid &&
+            (theatreForm.get('url')!.dirty || theatreForm.get('url')!.touched)
+        }"
+      >
+        <input type="text" formControlName="url" name="url" placeholder="url" />
+      </div>
+    </div>
+  </div>
+  <div class="field">
+    <label>Περιγραφή.....</label>
+    <div class="fields">
+      <div
+        class="twelve wide field"
+        [ngClass]="{
+          error:
+            theatreForm.get('description')!.invalid &&
+            (theatreForm.get('description')!.dirty ||
+              theatreForm.get('description')!.touched)
+        }"
+      >
+        <input
+          type="hidden"
+          formControlName="description"
+          name="description"
+          placeholder="Περιγραφή....."
+        />
+
+        <textarea
+          id="story"
+          name="story"
+          rows="5"
+          cols="33"
+          placeholder="Περιγραφή....."
+        ></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="fields">
+      <div
+        class="four wide field"
+        [ngClass]="{
+          error:
+            theatreForm.get('day')!.invalid &&
+            (theatreForm.get('day')!.dirty || theatreForm.get('day')!.touched)
+        }"
+      >
+        <label>Ημέρα</label>
+        <input
+          type="number"
+          min="1"
+          max="31"
+          maxlength="2"
+          formControlName="day"
+          name="day"
+          placeholder="Ημέρα"
+        />
+      </div>
+
+      <div class="four wide field">
+        <label>Μήνας</label>
+        <div
+          class="field"
+          [ngClass]="{
+            error:
+              theatreForm.get('month')!.invalid &&
+              (theatreForm.get('month')!.dirty ||
+                theatreForm.get('month')!.touched)
+          }"
+        >
+          <select #month class="ui fluid search dropdown" name="month">
+            <option value="">Μήνας</option>
+            <option value="1">Ιανουάριος</option>
+            <option value="2">Φεβρουάριος</option>
+            <option value="3">Μάρτιος</option>
+            <option value="4">Απρίλιος</option>
+            <option value="5">Μάιος</option>
+            <option value="6">Ιούνιος</option>
+            <option value="7">Ιούλιος</option>
+            <option value="8">Αύγουστος</option>
+            <option value="9">Σεπτέβριος</option>
+            <option value="10">Οκτώβριος</option>
+            <option value="11">Νοέμβριος</option>
+            <option value="12">Δεκέμβριος</option>
+          </select>
+        </div>
+      </div>
+      <div
+        class="four wide field"
+        [ngClass]="{
+          error:
+            theatreForm.get('year')!.invalid &&
+            (theatreForm.get('year')!.dirty || theatreForm.get('year')!.touched)
+        }"
+      >
+        <label>Έτος</label>
+
+        <input
+          type="number"
+          formControlName="year"
+          name="year"
+          min="2023"
+          maxlength="4"
+          placeholder="Έτος"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="fields">
+      <div class="six wide field">
+        <label>Ανέβασμα Φωτογραφίας</label>
+        <div class="column">
+          <div class="ui segment">
+            <div class="ui header">Εικόνα τετράγωνη</div>
+            <div class="ui action input">
+              <input #simplePhoto type="file" (change)="onFileChange($event)" />
+              <button
+                class="ui primary button"
+                (click)="triggerSimplePhotoInput()"
+              >
+                Upload
+              </button>
+            </div>
+            <div class="ui message" *ngIf="fileSelected">
+              <p>File selected: {{ selectedFileName }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="six wide field">
+        <label>Ανέβασμα Φωτογραφίας</label>
+        <div class="column">
+          <div class="ui segment">
+            <div class="ui header">Εικόνα παραλληλόγραμμη</div>
+            <div class="ui action input">
+              <input #coverPhoto type="file" (change)="onFileChange($event)" />
+              <button
+                class="ui primary button"
+                (click)="triggerCoverPhotoInput()"
+              >
+                Upload
+              </button>
+            </div>
+            <div class="ui message" *ngIf="fileSelected">
+              <p>File selected: {{ selectedFileName }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="button-wrapper">
+    <div
+      class="ui button my-button right"
+      (click)="submit(theatreForm)"
+      tabindex="0"
     >
-      Upload
-    </button>
+      Αγορά
+    </div>
   </div>
-  <div class="ui message" *ngIf="fileSelected">
-    <p>File selected: {{ selectedFileName }}</p>
+  <div
+    *ngIf="(theatreForm.invalid && isSubmitted) || errorReturned"
+    class="ui error message"
+  >
+    Υπάρχουν κάποια λάθη!!
   </div>
-</div>
+</form>

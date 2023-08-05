@@ -26,7 +26,6 @@ export class FileController {
     }),
   )
   uploadFile(@UploadedFile() file: any): { filename: string } {
-    console.log('hi');
     return { filename: file.filename };
   }
 }
