@@ -5,6 +5,8 @@ import { HomeComponent } from './home/home.component';
 import { MoviesComponent } from './movies/movies.component';
 import { MusicComponent } from './music/music.component';
 import { TheatreComponent } from './theatre/theatre.component';
+import { ConcertComponent } from './theatre/concert/concert.component';
+import { TicketComponent } from './theatre/ticket/ticket.component';
 
 const routes: Routes = [
   {
@@ -15,23 +17,23 @@ const routes: Routes = [
 
       {
         path: 'home',
-        component: HomeComponent,
-        pathMatch: 'full',
+        loadChildren: () =>
+          import('./home/home.module').then((m) => m.HomeModule),
       },
       {
         path: 'movies',
-        component: MoviesComponent,
-        pathMatch: 'full',
+        loadChildren: () =>
+          import('./movies/movies.module').then((m) => m.MoviesModule),
       },
       {
         path: 'music',
-        component: MusicComponent,
-        pathMatch: 'full',
+        loadChildren: () =>
+          import('./music/music.module').then((m) => m.MusicModule),
       },
       {
         path: 'theatre',
-        component: TheatreComponent,
-        pathMatch: 'full',
+        loadChildren: () =>
+          import('./theatre/theatre.module').then((m) => m.TheatreModule),
       },
     ],
   },

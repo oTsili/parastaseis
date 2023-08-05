@@ -13,7 +13,7 @@ export class CardListComponent {
   constructor(private router: Router) {}
 
   navigateToLink(item: any) {
-    this.router.navigate(['/theatre/reservation'], {
+    this.router.navigate([`${item.url}`], {
       state: { data: { concert: item } },
     });
   }

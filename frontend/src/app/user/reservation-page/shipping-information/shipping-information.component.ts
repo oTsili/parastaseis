@@ -8,7 +8,7 @@ import { ShippingInformationService } from './shipping-information.service';
 
 export interface Shipping {
   firstname: string;
-  lastName: string;
+  lastname: string;
   shippingAddress: string;
   postalCode: string;
   shippingCity: string;
@@ -131,7 +131,7 @@ export class ShippingInformationComponent {
 
     const shipping: Shipping = {
       firstname: form.value.firstname,
-      lastName: form.value.lastname,
+      lastname: form.value.lastname,
       shippingAddress: form.value.shippingAddress,
       postalCode: form.value.postalCode,
       shippingCity: form.value.shippingCity,
@@ -152,7 +152,7 @@ export class ShippingInformationComponent {
     // if asShipping button is checked, then assign the shipping values to the receipt values
     if (this.isChecked) {
       shipping.receiptFirstname = shipping.firstname;
-      shipping.receiptLastname = shipping.lastName;
+      shipping.receiptLastname = shipping.lastname;
       shipping.receiptAddress = shipping.shippingAddress;
       shipping.receiptPostalcode = shipping.postalCode;
       shipping.receiptCity = shipping.shippingCity;
@@ -205,7 +205,7 @@ export class ShippingInformationComponent {
   }
 
   previous() {
-    this.router.navigate(['/theatre/reservation/tickets'], {
+    this.router.navigate([`${this.concert.url}/tickets`], {
       state: { data: { concert: this.concert, ticket: this.ticket } },
     });
   }
@@ -229,7 +229,7 @@ export class ShippingInformationComponent {
   }
 
   printTicket(concert: Concert, ticket: Ticket, userInformation: Shipping) {
-    this.router.navigate(['/theatre/reservation/printTicket'], {
+    this.router.navigate([`${concert.url}/printTicket`], {
       state: { data: { concert: this.concert, ticket, userInformation } },
     });
   }

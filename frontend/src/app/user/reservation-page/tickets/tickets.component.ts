@@ -24,7 +24,7 @@ export class TicketsComponent {
   }
 
   buyTicket(concert: Concert, ticket: Ticket) {
-    this.router.navigate(['/theatre/reservation/shippingInformation'], {
+    this.router.navigate([`${concert.url}/shippingInformation`], {
       state: { data: { concert: this.concert, ticket } },
     });
   }

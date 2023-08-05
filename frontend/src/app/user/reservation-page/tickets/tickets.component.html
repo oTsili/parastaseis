@@ -4,6 +4,7 @@
       <tr>
         <th>Ημερομηνία</th>
         <th>Τιμή</th>
+        <th>Εισιτήριο</th>
         <th>Διαθέσιμα</th>
         <th></th>
       </tr>
@@ -11,7 +12,8 @@
     <tbody>
       <tr *ngFor="let ticket of concert.tickets">
         <td>{{ ticket.time }} {{ ticket.date }}</td>
-        <td>{{ ticket.price }}</td>
+        <td>{{ ticket.price }} &euro;</td>
+        <td>{{ ticket.type }}</td>
         <td>{{ ticket.seats }}</td>
         <td class="ui center aligned">
           <div

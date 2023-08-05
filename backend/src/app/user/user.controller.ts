@@ -79,8 +79,8 @@ export class UserController {
     const shipping = new this.userService.shippingModel(createShippingDto);
     // Create a new object with only the desired properties
     const responseObj = {
-      property1: shipping.firstname,
-      property2: shipping.lastName,
+      firstname: shipping.firstname,
+      lastname: shipping.lastname,
     };
 
     // Save the shipping object

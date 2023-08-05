@@ -49,6 +49,9 @@ export class TheatreController {
     console.log(createTheatreDto);
     console.log(files);
 
+    createTheatreDto.coverImage = files[0].path;
+    createTheatreDto.simpleImage = files[0].path;
+
     const theatre = new this.theatreService.theatreModel(createTheatreDto);
 
     await theatre.save();

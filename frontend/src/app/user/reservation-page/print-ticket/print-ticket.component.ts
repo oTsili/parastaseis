@@ -1,4 +1,10 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Concert } from '../../shared/multi-item-carousel/multi-item-carousel.interface';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
@@ -11,7 +17,7 @@ import { Shipping } from '../shipping-information/shipping-information.component
   templateUrl: './print-ticket.component.html',
   styleUrls: ['./print-ticket.component.scss'],
 })
-export class PrintTicketComponent {
+export class PrintTicketComponent implements OnInit, AfterViewInit {
   ticketsLeft: number = 100; // Replace this with the actual tickets left for the concert
   data: { concert: Concert; ticket: Ticket; userInformation: Shipping };
   concert: Concert;
@@ -31,6 +37,7 @@ export class PrintTicketComponent {
 
   ngAfterViewInit() {
     this.generateRandomString();
+    this.shippingInformation = this.data.userInformation;
   }
 
   generateQRCode(qrCodeValue: string) {
@@ -58,7 +65,9 @@ export class PrintTicketComponent {
 
     this.randomString = result;
 
-    this.generateQRCode(this.randomString);
+    this.generateQRCode(
+      `ticketNo:${this.randomString}, Name:${this.shippingInformation.firstname}, Lastname:${this.shippingInformation.lastname}`
+    );
   }
 
   downloadPDF() {

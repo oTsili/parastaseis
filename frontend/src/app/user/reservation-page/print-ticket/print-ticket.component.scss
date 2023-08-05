@@ -17,7 +17,7 @@
 
 .ticket {
   width: 50rem;
-  height: 50rem;
+  height: 55rem;
   background-color: #fff;
   border: 1px solid #ccc;
   padding: 15px;
@@ -44,16 +44,16 @@
   justify-content: space-between;
 }
 
-.event-info {
-  width: 70%;
-}
+// .event-info {
+//   width: 70%;
+// }
 
 .ticket-number {
-  width: 30%;
+  width: 100%;
 }
 
 .right-column {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.1rem;
 }

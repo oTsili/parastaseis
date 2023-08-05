@@ -9,7 +9,7 @@ export class Shipping {
   firstname: string;
 
   @Prop({ required: true })
-  lastName: string;
+  lastname: string;
 
   @Prop({ required: true })
   shippingAddress: string;

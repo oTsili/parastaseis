@@ -7,7 +7,7 @@ export class CreateShippingDto {
 
   @IsNotEmpty()
   @IsString()
-  lastName: string;
+  lastname: string;
 
   @IsNotEmpty()
   @IsString()
