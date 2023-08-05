@@ -11,9 +11,13 @@ import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { MultipleFilesInterceptor } from '../interceptors/multipleFiles.interceptor';
 import { editFileName, imageFileFilter } from '../utils/image-upload.utils';
+import { CreateTheatreDto } from './dto/create-theatre.dto';
+import { TheatreService } from './theatre.service';
 
 @Controller('admin/theatre')
-export class FileController {
+export class TheatreController {
+  constructor(private theatreService: TheatreService) {}
+
   @Post('')
   @UseInterceptors(
     FilesInterceptor('files', 2, {
@@ -38,12 +42,25 @@ export class FileController {
   //     }),
   //   }),
   // )
-  async saveEvent(@UploadedFiles() files, @Body() body) {
-    console.log(body);
+  async saveEvent(
+    @UploadedFiles() files,
+    @Body() createTheatreDto: CreateTheatreDto,
+  ) {
+    console.log(createTheatreDto);
     console.log(files);
+
+    const theatre = new this.theatreService.theatreModel(createTheatreDto);
+
+    await theatre.save();
+
+    const responseObj = {
+      property1: theatre.title,
+      property2: theatre._id,
+    };
+
     // console.log(coverImage);
     // console.log(simpleImage);
     // return { filename: file.filename };
-    return body;
+    return responseObj;
   }
 }

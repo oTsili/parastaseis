@@ -56,3 +56,16 @@
 .button-wrapper {
   margin-top: 3%;
 }
+
+.ui.segment.error {
+  background: #fff6f6;
+}
+
+.ui.error.message {
+  display: block;
+  width: 75%;
+}
+
+.ui.message {
+  font-size: 1.5rem;
+}

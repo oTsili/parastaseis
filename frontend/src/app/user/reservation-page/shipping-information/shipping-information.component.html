@@ -6,7 +6,11 @@
       <div
         class="field"
         [ngClass]="{
-          error: shippingForm.get('firstname')!.invalid && isSubmitted
+          error:
+            shippingForm.get('firstname')!.invalid &&
+            (shippingForm.get('firstname')!.dirty ||
+              shippingForm.get('firstname')!.touched ||
+              isSubmitted)
         }"
       >
         <input
@@ -19,7 +23,11 @@
       <div
         class="field"
         [ngClass]="{
-          error: shippingForm.get('lastname')!.invalid && isSubmitted
+          error:
+            shippingForm.get('lastname')!.invalid &&
+            (shippingForm.get('lastname')!.dirty ||
+              shippingForm.get('lastname')!.touched ||
+              isSubmitted)
         }"
       >
         <input
@@ -37,7 +45,11 @@
       <div
         class="twelve wide field"
         [ngClass]="{
-          error: shippingForm.get('shippingAddress')!.invalid && isSubmitted
+          error:
+            shippingForm.get('shippingAddress')!.invalid &&
+            (shippingForm.get('shippingAddress')!.dirty ||
+              shippingForm.get('shippingAddress')!.touched ||
+              isSubmitted)
         }"
       >
         <input
@@ -50,7 +62,11 @@
       <div
         class="four wide field"
         [ngClass]="{
-          error: shippingForm.get('postalCode')!.invalid && isSubmitted
+          error:
+            shippingForm.get('postalCode')!.invalid &&
+            (shippingForm.get('postalCode')!.dirty ||
+              shippingForm.get('postalCode')!.touched ||
+              isSubmitted)
         }"
       >
         <input
@@ -66,7 +82,11 @@
     <div
       class="twelve wide field"
       [ngClass]="{
-        error: shippingForm.get('shippingCity')!.invalid && isSubmitted
+        error:
+          shippingForm.get('shippingCity')!.invalid &&
+          (shippingForm.get('shippingCity')!.dirty ||
+            shippingForm.get('shippingCity')!.touched ||
+            isSubmitted)
       }"
     >
       <input
@@ -79,7 +99,11 @@
     <div
       class="four wide field"
       [ngClass]="{
-        error: shippingForm.get('shippingTown')!.invalid && isSubmitted
+        error:
+          shippingForm.get('shippingTown')!.invalid &&
+          (shippingForm.get('shippingTown')!.dirty ||
+            shippingForm.get('shippingTown')!.touched ||
+            isSubmitted)
       }"
     >
       <input
@@ -95,7 +119,11 @@
   <div
     class="field"
     [ngClass]="{
-      error: shippingForm.get('cardType')!.invalid && isSubmitted
+      error:
+        shippingForm.get('cardType')!.invalid &&
+        (shippingForm.get('cardType')!.dirty ||
+          shippingForm.get('cardType')!.touched ||
+          isSubmitted)
     }"
   >
     <label>Κάρτα</label>
@@ -134,7 +162,11 @@
     <div
       class="seven wide field"
       [ngClass]="{
-        error: shippingForm.get('cardNumber')!.invalid && isSubmitted
+        error:
+          shippingForm.get('cardNumber')!.invalid &&
+          (shippingForm.get('cardNumber')!.dirty ||
+            shippingForm.get('cardNumber')!.touched ||
+            isSubmitted)
       }"
     >
       <label>Αριθμός Κάρτας</label>
@@ -149,7 +181,11 @@
     <div
       class="three wide field"
       [ngClass]="{
-        error: shippingForm.get('cardCvc')!.invalid && isSubmitted
+        error:
+          shippingForm.get('cardCvc')!.invalid &&
+          (shippingForm.get('cardCvc')!.dirty ||
+            shippingForm.get('cardCvc')!.touched ||
+            isSubmitted)
       }"
     >
       <label>CVC</label>
@@ -169,7 +205,9 @@
           [ngClass]="{
             error:
               shippingForm.get('expirationDate')!.invalid &&
-              isSubmitted &&
+              (shippingForm.get('expirationDate')!.dirty ||
+                shippingForm.get('expirationDate')!.touched ||
+                isSubmitted) &&
               !cardMonth.value
           }"
         >
@@ -196,7 +234,11 @@
         <div
           class="field"
           [ngClass]="{
-            error: shippingForm.get('expirationDate')!.invalid && isSubmitted
+            error:
+              shippingForm.get('expirationDate')!.invalid &&
+              (shippingForm.get('expirationDate')!.dirty ||
+                shippingForm.get('expirationDate')!.touched ||
+                isSubmitted)
           }"
         >
           <input
@@ -236,9 +278,15 @@
       [ngClass]="{
         error:
           (shippingForm.get('receiptFirstname')!.invalid &&
-            isSubmitted &&
+            (shippingForm.get('receiptFirstname')!.dirty ||
+              shippingForm.get('receiptFirstname')!.touched ||
+              isSubmitted) &&
             !isChecked) ||
-          (isSubmitted && isChecked && shippingForm.get('firstname')!.invalid)
+          ((shippingForm.get('receiptFirstname')!.dirty ||
+            shippingForm.get('receiptFirstname')!.touched ||
+            isSubmitted) &&
+            isChecked &&
+            shippingForm.get('firstname')!.invalid)
       }"
     >
       <label>Όνομα</label>
@@ -256,9 +304,13 @@
           [ngClass]="{
             error:
               (shippingForm.get('receiptLastname')!.invalid &&
-                isSubmitted &&
+                (shippingForm.get('receiptLastname')!.dirty ||
+                  shippingForm.get('receiptLastname')!.touched ||
+                  isSubmitted) &&
                 !isChecked) ||
-              (isSubmitted &&
+              ((shippingForm.get('receiptLastname')!.dirty ||
+                shippingForm.get('receiptLastname')!.touched ||
+                isSubmitted) &&
                 isChecked &&
                 shippingForm.get('lastname')!.invalid)
           }"
@@ -280,9 +332,13 @@
           [ngClass]="{
             error:
               (shippingForm.get('receiptAddress')!.invalid &&
-                isSubmitted &&
+                (shippingForm.get('receiptAddress')!.dirty ||
+                  shippingForm.get('receiptAddress')!.touched ||
+                  isSubmitted) &&
                 !isChecked) ||
-              (isSubmitted &&
+              ((shippingForm.get('receiptAddress')!.dirty ||
+                shippingForm.get('receiptAddress')!.touched ||
+                isSubmitted) &&
                 isChecked &&
                 shippingForm.get('shippingAddress')!.invalid)
           }"
@@ -299,9 +355,13 @@
           [ngClass]="{
             error:
               (shippingForm.get('receiptPostalcode')!.invalid &&
-                isSubmitted &&
+                (shippingForm.get('receiptPostalcode')!.dirty ||
+                  shippingForm.get('receiptPostalcode')!.touched ||
+                  isSubmitted) &&
                 !isChecked) ||
-              (isSubmitted &&
+              ((shippingForm.get('receiptPostalcode')!.dirty ||
+                shippingForm.get('receiptPostalcode')!.touched ||
+                isSubmitted) &&
                 isChecked &&
                 shippingForm.get('postalCode')!.invalid)
           }"
@@ -321,9 +381,13 @@
         [ngClass]="{
           error:
             (shippingForm.get('receiptCity')!.invalid &&
-              isSubmitted &&
+              (shippingForm.get('receiptCity')!.dirty ||
+                shippingForm.get('receiptCity')!.touched ||
+                isSubmitted) &&
               !isChecked) ||
-            (isSubmitted &&
+            ((shippingForm.get('receiptCity')!.dirty ||
+              shippingForm.get('receiptCity')!.touched ||
+              isSubmitted) &&
               isChecked &&
               shippingForm.get('shippingCity')!.invalid)
         }"
@@ -340,9 +404,13 @@
         [ngClass]="{
           error:
             (shippingForm.get('receiptTown')!.invalid &&
-              isSubmitted &&
+              (shippingForm.get('receiptTown')!.dirty ||
+                shippingForm.get('receiptTown')!.touched ||
+                isSubmitted) &&
               !isChecked) ||
-            (isSubmitted &&
+            ((shippingForm.get('receiptTown')!.dirty ||
+              shippingForm.get('receiptTown')!.touched ||
+              isSubmitted) &&
               isChecked &&
               shippingForm.get('shippingTown')!.invalid)
         }"

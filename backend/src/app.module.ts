@@ -2,10 +2,9 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PassportModule } from '@nestjs/passport';
-import { JwtModule } from '@nestjs/jwt';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserModule } from './app/user/user.module';
-import { FileController } from './app/admin/theatre/theatre.controller';
+import { TheatreModule } from './app/admin/theatre/theatre.module';
 
 @Module({
   imports: [
@@ -14,8 +13,9 @@ import { FileController } from './app/admin/theatre/theatre.controller';
     MongooseModule.forRoot(
       'mongodb://127.0.0.1:27017/parastaseis?authSource=admin',
     ),
+    TheatreModule,
   ],
-  controllers: [AppController, FileController],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}

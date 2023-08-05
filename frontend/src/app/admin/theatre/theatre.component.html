@@ -9,7 +9,8 @@
             error:
               theatreForm.get('title')!.invalid &&
               (theatreForm.get('title')!.dirty ||
-                theatreForm.get('title')!.touched)
+                theatreForm.get('title')!.touched ||
+                isSubmitted)
           }"
         >
           <label>Τίτλος</label>
@@ -27,7 +28,8 @@
             error:
               theatreForm.get('category')!.invalid &&
               (theatreForm.get('category')!.dirty ||
-                theatreForm.get('category')!.touched)
+                theatreForm.get('category')!.touched ||
+                isSubmitted)
           }"
         >
           <label>Κατηγορία</label>
@@ -44,7 +46,9 @@
           [ngClass]="{
             error:
               theatreForm.get('url')!.invalid &&
-              (theatreForm.get('url')!.dirty || theatreForm.get('url')!.touched)
+              (theatreForm.get('url')!.dirty ||
+                theatreForm.get('url')!.touched ||
+                isSubmitted)
           }"
         >
           <label>URL</label>
@@ -65,7 +69,8 @@
             error:
               theatreForm.get('description')!.invalid &&
               (theatreForm.get('description')!.dirty ||
-                theatreForm.get('description')!.touched)
+                theatreForm.get('description')!.touched ||
+                isSubmitted)
           }"
         >
           <label>Περιγραφή.....</label>
@@ -90,7 +95,9 @@
           [ngClass]="{
             error:
               theatreForm.get('url')!.invalid &&
-              (theatreForm.get('url')!.dirty || theatreForm.get('url')!.touched)
+              (theatreForm.get('url')!.dirty ||
+                theatreForm.get('url')!.touched ||
+                isSubmitted)
           }"
         >
           <label>Τοποθεσία</label>
@@ -111,7 +118,9 @@
           [ngClass]="{
             error:
               theatreForm.get('day')!.invalid &&
-              (theatreForm.get('day')!.dirty || theatreForm.get('day')!.touched)
+              (theatreForm.get('day')!.dirty ||
+                theatreForm.get('day')!.touched ||
+                isSubmitted)
           }"
         >
           <label>Ημέρα</label>
@@ -134,7 +143,8 @@
               error:
                 theatreForm.get('month')!.invalid &&
                 (theatreForm.get('month')!.dirty ||
-                  theatreForm.get('month')!.touched)
+                  theatreForm.get('month')!.touched ||
+                  isSubmitted)
             }"
           >
             <select #month class="ui fluid search dropdown" name="month">
@@ -160,7 +170,8 @@
             error:
               theatreForm.get('year')!.invalid &&
               (theatreForm.get('year')!.dirty ||
-                theatreForm.get('year')!.touched)
+                theatreForm.get('year')!.touched ||
+                isSubmitted)
           }"
         >
           <label>Έτος</label>
@@ -179,10 +190,20 @@
 
     <div class="field">
       <div class="fields">
-        <div class="six wide field">
+        <div
+          class="six wide field"
+          [ngClass]="{
+            error: !selectedSimpleImageName && isSubmitted
+          }"
+        >
           <label>Ανέβασμα Φωτογραφίας</label>
           <div class="column">
-            <div class="ui segment">
+            <div
+              class="ui segment"
+              [ngClass]="{
+                error: !selectedSimpleImageName && isSubmitted
+              }"
+            >
               <div class="ui header">Εικόνα τετράγωνη</div>
               <div class="ui action input">
                 <input
@@ -203,10 +224,20 @@
             </div>
           </div>
         </div>
-        <div class="six wide field">
+        <div
+          class="six wide field"
+          [ngClass]="{
+            error: !selectedCoverImageName && isSubmitted
+          }"
+        >
           <label>Ανέβασμα Φωτογραφίας</label>
           <div class="column">
-            <div class="ui segment">
+            <div
+              class="ui segment"
+              [ngClass]="{
+                error: !selectedCoverImageName && isSubmitted
+              }"
+            >
               <div class="ui header">Εικόνα παραλληλόγραμμη</div>
               <div class="ui action input">
                 <input

@@ -104,6 +104,13 @@ export class TheatreComponent implements OnInit {
   // }
 
   submit(form: FormGroup) {
+    this.isSubmitted = true;
+
+    if (form.invalid) {
+      console.log('form is invalid!');
+      return;
+    }
+
     let concert;
     if (this.selectedCoverPhoto && this.selectedSimplePhoto) {
       concert = {
