@@ -13,19 +13,14 @@
       <tr *ngFor="let ticket of tickets">
         <td>{{ ticket.time }} {{ ticket.date }}</td>
         <td>{{ ticket.price }} &euro;</td>
-        <td>{{ ticket.type }}</td>
+        <td>{{ ticket.socialType }}</td>
         <td>{{ ticket.seats }}</td>
         <td class="ui center aligned">
           <div
-            [class.error]="!isLoggedIn()"
             class="ui massive teal button my-button"
             (click)="buyTicket(event, ticket)"
           >
-            <!-- [routerLink]="['../shippingInformation', event.title]" -->
             Αγορά Εισιτηρίου
-          </div>
-          <div class="ui pointing red basic label" *ngIf="!isLoggedIn()">
-            Δεν είστε συνδεδεμένος.
           </div>
         </td>
       </tr>

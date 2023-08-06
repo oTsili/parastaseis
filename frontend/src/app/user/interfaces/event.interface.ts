@@ -7,4 +7,5 @@ export interface Event {
   coverImage: string;
   location: string;
   url: string;
+  _id: string;
 }

@@ -124,17 +124,19 @@ export class EventComponent {
       };
     }
 
-    this.submitSubscription = this.theatreService.onSubmit(event).subscribe({
-      next: (response) => {
-        console.log(response);
-        this.theatreForm.reset();
-        this.resetForm();
-        this.isSubmitted = false;
-      },
-      error: (error) => {
-        let errorMessage = error.error.message;
-        console.error(errorMessage);
-      },
-    });
+    this.submitSubscription = this.theatreService
+      .onSubmitEvent(event)
+      .subscribe({
+        next: (response) => {
+          console.log(response);
+          this.theatreForm.reset();
+          this.resetForm();
+          this.isSubmitted = false;
+        },
+        error: (error) => {
+          let errorMessage = error.error.message;
+          console.error(errorMessage);
+        },
+      });
   }
 }

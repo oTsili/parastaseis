@@ -20,6 +20,7 @@ import {
 } from '../admin/utils/image-upload.utils';
 import { CreateEventDto } from './dto/create-event.dto';
 import { EventService } from './event.service';
+import { CreateTicketDto } from './dto/create-ticket.dto';
 
 @Controller('event')
 export class EventController {
@@ -72,6 +73,31 @@ export class EventController {
     // console.log(simpleImage);
     // return { filename: file.filename };
     return responseObj;
+  }
+
+  @Post('ticket')
+  async saveTicket(@Body() createTicketDto: CreateTicketDto, @Res() res) {
+    console.log(createTicketDto);
+
+    const ticket = new this.eventService.ticketModel(createTicketDto);
+
+    await ticket.save();
+
+    const responseObj = {
+      property2: ticket._id,
+    };
+
+    return res.status(HttpStatus.OK).json({ responseObj });
+  }
+
+  @Get('ticket/:event')
+  async fetchTickets(@Req() req, @Res() res, @Param() param) {
+    const event = param.event;
+    const tickets = await this.eventService.findTicketsByEvent(event);
+
+    console.log({ tickets });
+
+    return res.status(HttpStatus.OK).json({ tickets });
   }
 
   @Get(':category')

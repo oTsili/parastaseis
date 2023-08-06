@@ -19,9 +19,7 @@ export class TheatrePageService {
       })
       .pipe(
         map((response) => {
-          console.log(response);
           response.events.forEach((event: Event) => {
-            console.log(event);
             event.coverImage = `${BACKEND_URL.replace(
               '/api',
               ''
@@ -34,5 +32,11 @@ export class TheatrePageService {
           return response;
         })
       );
+  }
+
+  onGetTickets(eventId: string) {
+    return this.httpClient.get<any>(`${BACKEND_URL}/event/ticket/${eventId}`, {
+      withCredentials: true,
+    });
   }
 }

@@ -1,7 +1,8 @@
 export interface Ticket {
   time: string;
+  price: string;
+  seats: string;
   date: string;
-  price: number;
-  type: string;
-  seats: number;
+  socialType: string;
+  event: string;
 }

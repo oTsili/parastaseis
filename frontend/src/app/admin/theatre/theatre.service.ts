@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, tap } from 'rxjs';
+import { Ticket } from 'src/app/user/interfaces/Ticket.interface';
 import { environment } from 'src/environments/environment';
 
 const BACKEND_URL = environment.BASE_URL;
@@ -11,7 +12,33 @@ const BACKEND_URL = environment.BASE_URL;
 export class TheatreService {
   constructor(private httpClient: HttpClient) {}
 
-  onSubmit(event: any) {
+  onSubmitTicket(ticket: Ticket) {
+    // let headers = new Headers();
+    // /** No need to include Content-Type in Angular 4 */
+    // headers.append('Content-Type', 'multipart/form-data');
+    // headers.append('Accept', 'application/json');
+    // let options = new RequestOptions({ headers: headers });
+    console.log(ticket);
+    return this.httpClient
+      .post<any>(`${BACKEND_URL}/event/ticket`, ticket, {
+        withCredentials: true,
+      })
+      .pipe(
+        tap(() => {
+          // inform the observers that the user's account information are now available
+          // inform observers about account info availability
+          // this.accountService.onUpdateAccount();
+        })
+      )
+      .pipe(
+        map((fileData) => {
+          console.log(fileData);
+          return fileData;
+        })
+      );
+  }
+
+  onSubmitEvent(event: any) {
     const {
       title,
       availableTickets,

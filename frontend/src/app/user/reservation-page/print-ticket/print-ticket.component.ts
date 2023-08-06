@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   OnInit,
@@ -26,7 +27,10 @@ export class PrintTicketComponent implements OnInit, AfterViewInit {
   randomString: string;
   @ViewChild('qrcodeCanvas', { static: true }) qrcodeCanvas: ElementRef;
 
-  constructor(private elementRef: ElementRef) {}
+  constructor(
+    private elementRef: ElementRef,
+    private cdref: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
     this.data = history.state?.data;
@@ -68,6 +72,7 @@ export class PrintTicketComponent implements OnInit, AfterViewInit {
     this.generateQRCode(
       `ticketNo:${this.randomString}, Name:${this.shippingInformation.firstname}, Lastname:${this.shippingInformation.lastname}`
     );
+    this.cdref.detectChanges();
   }
 
   downloadPDF() {
