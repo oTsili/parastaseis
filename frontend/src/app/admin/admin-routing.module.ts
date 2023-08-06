@@ -5,7 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { MoviesComponent } from './movies/movies.component';
 import { MusicComponent } from './music/music.component';
 import { TheatreComponent } from './theatre/theatre.component';
-import { ConcertComponent } from './theatre/concert/concert.component';
+import { EventComponent } from './theatre/event/event.component';
 import { TicketComponent } from './theatre/ticket/ticket.component';
 
 const routes: Routes = [

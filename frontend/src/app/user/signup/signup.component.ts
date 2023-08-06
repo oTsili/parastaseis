@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AppService } from 'src/app/app.service';
 import { RetypeConfirm } from 'src/app/validators/password-confirm.validator';
-import { SignupAuthData } from './signup.interface';
+import { SignupAuthData } from '../interfaces/signup.interface';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';

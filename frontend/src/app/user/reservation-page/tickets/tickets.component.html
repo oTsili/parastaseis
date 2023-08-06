@@ -10,7 +10,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let ticket of concert.tickets">
+      <tr *ngFor="let ticket of tickets">
         <td>{{ ticket.time }} {{ ticket.date }}</td>
         <td>{{ ticket.price }} &euro;</td>
         <td>{{ ticket.type }}</td>
@@ -19,9 +19,9 @@
           <div
             [class.error]="!isLoggedIn()"
             class="ui massive teal button my-button"
-            (click)="buyTicket(concert, ticket)"
+            (click)="buyTicket(event, ticket)"
           >
-            <!-- [routerLink]="['../shippingInformation', concert.title]" -->
+            <!-- [routerLink]="['../shippingInformation', event.title]" -->
             Αγορά Εισιτηρίου
           </div>
           <div class="ui pointing red basic label" *ngIf="!isLoggedIn()">

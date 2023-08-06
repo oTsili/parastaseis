@@ -4,11 +4,11 @@ import { Subscription } from 'rxjs';
 import { TheatreService } from '../theatre.service';
 
 @Component({
-  selector: 'app-concert',
-  templateUrl: './concert.component.html',
-  styleUrls: ['./concert.component.scss'],
+  selector: 'app-event',
+  templateUrl: './event.component.html',
+  styleUrls: ['./event.component.scss'],
 })
-export class ConcertComponent {
+export class EventComponent {
   isSimplePhotoSelected = false;
   isCoverPhotoSelected = false;
   selectedSimpleImageName = '';
@@ -102,9 +102,9 @@ export class ConcertComponent {
       return;
     }
 
-    let concert;
+    let event;
     if (this.selectedCoverPhoto && this.selectedSimplePhoto) {
-      concert = {
+      event = {
         title: form.value.title,
         category: this.category.nativeElement.value,
         description: this.description.nativeElement.value,
@@ -116,7 +116,7 @@ export class ConcertComponent {
       };
     }
 
-    this.submitSubscription = this.theatreService.onSubmit(concert).subscribe({
+    this.submitSubscription = this.theatreService.onSubmit(event).subscribe({
       next: (response) => {
         console.log(response);
       },

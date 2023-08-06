@@ -6,12 +6,12 @@
     <div class="ui card my-card fluid column">
       <div class="row">
         <div class="twelve wide column">
-          <img class="ui fluid image" src="{{ concert.header_image }}" />
-          <h2 class="ui header">{{ concert.title }}</h2>
-          <p>Ημερομηνία: {{ concert.date }}</p>
-          <p>Τοποθεσία: {{ concert.location }}</p>
+          <img class="ui fluid image" src="{{ event.header_image }}" />
+          <h2 class="ui header">{{ event.title }}</h2>
+          <p>Ημερομηνία: {{ event.date }}</p>
+          <p>Τοποθεσία: {{ event.location }}</p>
           <p>Διαθέσιμα εισιτήρια: {{ ticketsLeft }}</p>
-          <p>Περιγραφή: {{ concert.description }}</p>
+          <p>Περιγραφή: {{ event.description }}</p>
         </div>
       </div>
 

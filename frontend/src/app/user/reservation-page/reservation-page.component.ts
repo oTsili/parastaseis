@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Concert } from '../shared/multi-item-carousel/multi-item-carousel.interface';
-import { Ticket } from '../shared/multi-item-carousel/Ticket.interface';
+import { Ticket } from '../interfaces/Ticket.interface';
+import { Event } from '../interfaces/event.interface';
 
 @Component({
   selector: 'app-reservation-page',
@@ -8,15 +8,17 @@ import { Ticket } from '../shared/multi-item-carousel/Ticket.interface';
   styleUrls: ['./reservation-page.component.scss'],
 })
 export class ReservationPageComponent implements OnInit {
-  concert: Concert;
-  data: { concert: Concert; ticket: Ticket };
+  event: Event;
+  ticket: Ticket;
+  data: { event: Event; ticket: Ticket };
 
-  ticketsLeft: number = 100; // Replace this with the actual tickets left for the concert
+  ticketsLeft: number = 100; // Replace this with the actual tickets left for the event
 
   constructor() {}
 
   ngOnInit() {
     this.data = history.state?.data;
-    this.concert = this.data.concert;
+    this.event = this.data.event;
+    this.ticket = this.data.ticket;
   }
 }

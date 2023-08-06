@@ -5,12 +5,12 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { Concert } from '../../shared/multi-item-carousel/multi-item-carousel.interface';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
-import { Ticket } from '../../shared/multi-item-carousel/Ticket.interface';
+import { Ticket } from '../../interfaces/Ticket.interface';
 import * as QRCode from 'qrcode';
-import { Shipping } from '../shipping-information/shipping-information.component';
+import { Shipping } from '../../interfaces/shipping.interface';
+import { Event } from '../../interfaces/event.interface';
 
 @Component({
   selector: 'app-print-ticket',
@@ -18,9 +18,9 @@ import { Shipping } from '../shipping-information/shipping-information.component
   styleUrls: ['./print-ticket.component.scss'],
 })
 export class PrintTicketComponent implements OnInit, AfterViewInit {
-  ticketsLeft: number = 100; // Replace this with the actual tickets left for the concert
-  data: { concert: Concert; ticket: Ticket; userInformation: Shipping };
-  concert: Concert;
+  ticketsLeft: number = 100; // Replace this with the actual tickets left for the event
+  data: { event: Event; ticket: Ticket; userInformation: Shipping };
+  event: Event;
   ticket: Ticket;
   shippingInformation: Shipping;
   randomString: string;
@@ -30,7 +30,7 @@ export class PrintTicketComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.data = history.state?.data;
-    this.concert = this.data.concert;
+    this.event = this.data.event;
     this.ticket = this.data.ticket;
     this.shippingInformation = this.data.userInformation;
   }

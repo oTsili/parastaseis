@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TheatreComponent } from './theatre.component';
-import { ConcertComponent } from './concert/concert.component';
+import { EventComponent } from './event/event.component';
 import { TicketComponent } from './ticket/ticket.component';
 
 const routes: Routes = [
@@ -9,11 +9,11 @@ const routes: Routes = [
     path: '',
     component: TheatreComponent,
     children: [
-      { path: '', redirectTo: 'concert', pathMatch: 'full' },
+      { path: '', redirectTo: 'event', pathMatch: 'full' },
 
       {
-        path: 'concert',
-        component: ConcertComponent,
+        path: 'event',
+        component: EventComponent,
         pathMatch: 'full',
       },
       {

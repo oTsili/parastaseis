@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input } from '@angular/core';
-import { Concert } from './multi-item-carousel.interface';
 import { Router } from '@angular/router';
+import { Event } from '../../interfaces/event.interface';
 
 @Component({
   selector: 'app-multi-item-carousel',
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./multi-item-carousel.component.scss'],
 })
 export class MultiItemCarouselComponent {
-  @Input() items: Concert[];
+  @Input() events: Event[];
   @Input() title: { first: string; secondary: string };
 
   constructor(private router: Router, private elementRef: ElementRef) {}
@@ -17,7 +17,7 @@ export class MultiItemCarouselComponent {
 
   navigateToLink(item: any) {
     this.router.navigate([`${item.url}`], {
-      state: { data: { concert: item } },
+      state: { data: { event: item } },
     });
   }
 

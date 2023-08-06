@@ -1,7 +1,7 @@
 <div class="ui container">
   <div class="ticket-wrapper">
     <div class="ticket">
-      <img class="ui fluid image" src="{{ concert.header_image }}" />
+      <img class="ui fluid image" src="{{ event.header_image }}" />
 
       <div class="ticket-header">
         <h1 class="ticket-title">Εισιτήριο</h1>
@@ -9,9 +9,9 @@
       <div class="ticket-body">
         <div class="ticket-details">
           <div class="event-info">
-            <p><strong>Event:</strong>{{ concert.title }}</p>
+            <p><strong>Event:</strong>{{ event.title }}</p>
             <p><strong>Ημερομηνία:</strong> {{ ticket.date }}</p>
-            <p><strong>Τοποθεσία:</strong> {{ concert.location }}</p>
+            <p><strong>Τοποθεσία:</strong> {{ event.location }}</p>
           </div>
           <div class="right-column">
             <div class="ticket-number">

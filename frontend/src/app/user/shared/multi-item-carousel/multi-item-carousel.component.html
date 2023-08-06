@@ -10,16 +10,16 @@
   <div class="carousel">
     <div class="ui three stackable cards">
       <div
-        *ngFor="let item of items"
+        *ngFor="let event of events"
         class="card"
-        (click)="navigateToLink(item)"
+        (click)="navigateToLink(event)"
       >
         <div class="image">
-          <img [src]="item.image" alt="Card Image" />
+          <img [src]="event.image" alt="Card Image" />
         </div>
         <div class="content">
-          <div class="header">{{ item.title }}</div>
-          <div class="description">{{ item.description }}</div>
+          <div class="header">{{ event.title }}</div>
+          <div class="description">{{ event.description }}</div>
         </div>
       </div>
     </div>

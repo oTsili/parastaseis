@@ -1,6 +1,4 @@
-import { Ticket } from './Ticket.interface';
-
-export interface Concert {
+export interface Event {
   date: string;
   title: string;
   category: string;
@@ -9,5 +7,4 @@ export interface Concert {
   header_image: string;
   location: string;
   url: string;
-  tickets: Ticket[];
 }

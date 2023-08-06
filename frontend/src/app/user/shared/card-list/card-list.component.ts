@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { Concert } from '../multi-item-carousel/multi-item-carousel.interface';
 import { Router } from '@angular/router';
+import { Ticket } from '../../interfaces/Ticket.interface';
+import { Event } from '../../interfaces/event.interface';
 
 @Component({
   selector: 'app-card-list',
@@ -8,13 +9,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./card-list.component.scss'],
 })
 export class CardListComponent {
-  @Input() items: Concert[];
+  @Input() events: Event[];
 
   constructor(private router: Router) {}
 
-  navigateToLink(item: any) {
-    this.router.navigate([`${item.url}`], {
-      state: { data: { concert: item } },
+  navigateToLink(event: any) {
+    this.router.navigate([`${event.url}`], {
+      state: { data: { event } },
     });
   }
 }

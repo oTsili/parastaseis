@@ -14,6 +14,7 @@ export class TheatreService {
   onSubmit(event: any) {
     const {
       title,
+      availableTickets,
       category,
       url,
       description,
@@ -25,6 +26,7 @@ export class TheatreService {
 
     console.log(
       title,
+      availableTickets,
       category,
       url,
       description,
@@ -36,6 +38,7 @@ export class TheatreService {
 
     const formData = new FormData();
     formData.append('title', title);
+    formData.append('availableTickets', availableTickets);
     formData.append('category', category);
     formData.append('url', url);
     formData.append('description', description);

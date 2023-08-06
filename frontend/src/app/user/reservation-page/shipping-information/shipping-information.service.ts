@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Shipping } from './shipping-information.component';
 import { environment } from 'src/environments/environment';
 import { map, tap } from 'rxjs';
+import { Shipping } from '../../interfaces/shipping.interface';
 
 const BACKEND_URL = environment.BASE_URL + '/user';
 

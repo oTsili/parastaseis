@@ -1,30 +1,11 @@
 import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
-import { Concert } from '../../shared/multi-item-carousel/multi-item-carousel.interface';
 import { Router } from '@angular/router';
-import { Ticket } from '../../shared/multi-item-carousel/Ticket.interface';
+import { Ticket } from '../../interfaces/Ticket.interface';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ShippingInformationService } from './shipping-information.service';
-
-export interface Shipping {
-  firstname: string;
-  lastname: string;
-  shippingAddress: string;
-  postalCode: string;
-  shippingCity: string;
-  shippingTown: string;
-  cardType: string;
-  cardNumber: string;
-  cardCvc: string;
-  expirationDate: string;
-  asShipping: boolean;
-  receiptFirstname: string;
-  receiptLastname: string;
-  receiptAddress: string;
-  receiptPostalcode: string;
-  receiptCity: string;
-  receiptTown: string;
-}
+import { Event } from '../../interfaces/event.interface';
+import { Shipping } from '../../interfaces/shipping.interface';
 
 @Component({
   selector: 'app-shipping-information',
@@ -40,16 +21,16 @@ export class ShippingInformationComponent {
 
   isOpen = false;
   isChecked = false;
-  concert: Concert;
+  event: Event;
   ticket: Ticket;
-  data: { concert: Concert; ticket: Ticket };
+  data: { event: Event; ticket: Ticket };
   cardTypes = [
     { title: 'Visa', value: 'visa' },
     { title: 'American Express', value: 'amex' },
     { title: 'MasterCard', value: 'mastercard' },
     { title: 'Discover', value: 'discover' },
   ];
-  ticketsLeft: number = 100; // Replace this with the actual tickets left for the concert
+  ticketsLeft: number = 100; // Replace this with the actual tickets left for the event
   shippingForm: FormGroup;
   isSubmitted = false;
   submitSubsciption: Subscription;
@@ -63,7 +44,7 @@ export class ShippingInformationComponent {
 
   ngOnInit() {
     this.data = history.state?.data;
-    this.concert = this.data.concert;
+    this.event = this.data.event;
     this.ticket = this.data.ticket;
 
     this.shippingForm = new FormGroup({
@@ -166,7 +147,7 @@ export class ShippingInformationComponent {
         next: (response) => {
           console.log({ response });
 
-          this.printTicket(this.concert, this.ticket, response);
+          this.printTicket(this.event, this.ticket, response);
           // localStorage.setItem('user', JSON.stringify(response));
         },
         error: (error) => {
@@ -205,8 +186,8 @@ export class ShippingInformationComponent {
   }
 
   previous() {
-    this.router.navigate([`${this.concert.url}/tickets`], {
-      state: { data: { concert: this.concert, ticket: this.ticket } },
+    this.router.navigate([`${this.event.url}/tickets`], {
+      state: { data: { event: this.event, ticket: this.ticket } },
     });
   }
 
@@ -228,9 +209,9 @@ export class ShippingInformationComponent {
     );
   }
 
-  printTicket(concert: Concert, ticket: Ticket, userInformation: Shipping) {
-    this.router.navigate([`${concert.url}/printTicket`], {
-      state: { data: { concert: this.concert, ticket, userInformation } },
+  printTicket(event: Event, ticket: Ticket, userInformation: Shipping) {
+    this.router.navigate([`${event.url}/printTicket`], {
+      state: { data: { event: this.event, ticket, userInformation } },
     });
   }
 }

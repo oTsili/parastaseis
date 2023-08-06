@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { BehaviorSubject } from 'rxjs';
-import { User } from '../user.interface';
-import { SignupAuthData } from '../signup/signup.interface';
+import { User } from '../interfaces/user.interface';
+import { SignupAuthData } from '../interfaces/signup.interface';
 
 const BACKEND_URL = environment.BASE_URL + '/user';
 
