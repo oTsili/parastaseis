@@ -69,6 +69,14 @@ export class EventComponent {
     // this.uploadPicture(this.selectedFile, this.selectedFileName);
   }
 
+  resetForm() {
+    this.description.nativeElement.value = '';
+    this.category.nativeElement.value = '';
+    this.month.nativeElement.value = '';
+    this.selectedSimplePhoto = null;
+    this.selectedCoverPhoto = null;
+  }
+
   triggerSimplePhotoInput() {
     // Programmatically trigger the click event of the file input
     const fileInput = this.simplePhoto.nativeElement;
@@ -108,7 +116,7 @@ export class EventComponent {
         title: form.value.title,
         category: this.category.nativeElement.value,
         description: this.description.nativeElement.value,
-        url: `/${this.category.nativeElement.value}/reservation`,
+        url: `/${this.category.nativeElement.value}/reservation`.toLowerCase(),
         date: `${form.value.day}/${this.month.nativeElement.value}/${form.value.year}`,
         location: form.value.location,
         simpleImage: this.selectedSimplePhoto,
@@ -119,6 +127,9 @@ export class EventComponent {
     this.submitSubscription = this.theatreService.onSubmit(event).subscribe({
       next: (response) => {
         console.log(response);
+        this.theatreForm.reset();
+        this.resetForm();
+        this.isSubmitted = false;
       },
       error: (error) => {
         let errorMessage = error.error.message;

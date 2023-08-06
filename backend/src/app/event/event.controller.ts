@@ -1,7 +1,12 @@
 import {
   Body,
   Controller,
+  Get,
+  HttpStatus,
+  Param,
   Post,
+  Req,
+  Res,
   UploadedFile,
   UploadedFiles,
   UseInterceptors,
@@ -9,20 +14,22 @@ import {
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
-import { MultipleFilesInterceptor } from '../interceptors/multipleFiles.interceptor';
-import { editFileName, imageFileFilter } from '../utils/image-upload.utils';
-import { CreateTheatreDto } from './dto/create-theatre.dto';
-import { TheatreService } from './theatre.service';
+import {
+  editFileName,
+  imageFileFilter,
+} from '../admin/utils/image-upload.utils';
+import { CreateEventDto } from './dto/create-event.dto';
+import { EventService } from './event.service';
 
-@Controller('admin/theatre')
-export class TheatreController {
-  constructor(private theatreService: TheatreService) {}
+@Controller('event')
+export class EventController {
+  constructor(private eventService: EventService) {}
 
   @Post('')
   @UseInterceptors(
     FilesInterceptor('files', 2, {
       storage: diskStorage({
-        destination: './src',
+        destination: './',
         filename: editFileName,
       }),
       fileFilter: imageFileFilter,
@@ -44,15 +51,15 @@ export class TheatreController {
   // )
   async saveEvent(
     @UploadedFiles() files,
-    @Body() createTheatreDto: CreateTheatreDto,
+    @Body() createEventDto: CreateEventDto,
   ) {
-    console.log(createTheatreDto);
+    console.log(createEventDto);
     console.log(files);
 
-    createTheatreDto.coverImage = files[0].path;
-    createTheatreDto.simpleImage = files[0].path;
+    createEventDto.coverImage = files[0].path;
+    createEventDto.simpleImage = files[1].path;
 
-    const theatre = new this.theatreService.theatreModel(createTheatreDto);
+    const theatre = new this.eventService.eventModel(createEventDto);
 
     await theatre.save();
 
@@ -65,5 +72,15 @@ export class TheatreController {
     // console.log(simpleImage);
     // return { filename: file.filename };
     return responseObj;
+  }
+
+  @Get(':category')
+  async fetchAccount(@Req() req, @Res() res, @Param() param) {
+    const category = param.category;
+    const events = await this.eventService.findEventsByCategory(category);
+
+    console.log({ events });
+
+    return res.status(HttpStatus.OK).json({ events });
   }
 }

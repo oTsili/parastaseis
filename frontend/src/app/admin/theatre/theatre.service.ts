@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-const BACKEND_URL = environment.BASE_URL + '/admin';
+const BACKEND_URL = environment.BASE_URL;
 
 @Injectable({
   providedIn: 'root',
@@ -55,7 +55,7 @@ export class TheatreService {
     // let options = new RequestOptions({ headers: headers });
     console.log(formData);
     return this.httpClient
-      .post<any>(`${BACKEND_URL}/theatre`, formData, {
+      .post<any>(`${BACKEND_URL}/event`, formData, {
         withCredentials: true,
       })
       .pipe(

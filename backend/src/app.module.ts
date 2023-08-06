@@ -4,7 +4,7 @@ import { AppService } from './app.service';
 import { PassportModule } from '@nestjs/passport';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserModule } from './app/user/user.module';
-import { TheatreModule } from './app/admin/theatre/theatre.module';
+import { EventModule } from './app/event/event.module';
 
 @Module({
   imports: [
@@ -13,7 +13,7 @@ import { TheatreModule } from './app/admin/theatre/theatre.module';
     MongooseModule.forRoot(
       'mongodb://127.0.0.1:27017/parastaseis?authSource=admin',
     ),
-    TheatreModule,
+    EventModule,
   ],
   controllers: [AppController],
   providers: [AppService],

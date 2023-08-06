@@ -1,10 +1,10 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
 
-export type TheatreDocument = Theatre & Document;
+export type EventDocument = Event & Document;
 
 @Schema()
-export class Theatre {
+export class Event {
   @Prop({ required: true })
   title: string;
 
@@ -32,4 +32,4 @@ export class Theatre {
   _id?: Types.ObjectId;
 }
 
-export const TheatreSchema = SchemaFactory.createForClass(Theatre);
+export const EventSchema = SchemaFactory.createForClass(Event);

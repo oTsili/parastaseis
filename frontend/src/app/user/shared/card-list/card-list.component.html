@@ -2,11 +2,11 @@
   <div class="four wide column" *ngFor="let event of events">
     <div class="ui card" (click)="navigateToLink(event)">
       <div class="image">
-        <img [src]="event.image" />
+        <img [src]="event.simpleImage" />
       </div>
       <div class="content">
         <div class="header">{{ event.title }}</div>
-        <div class="description">{{ event.description }}</div>
+        <div class="description">{{ event.description | slice : 0 : 100 }}</div>
       </div>
     </div>
   </div>

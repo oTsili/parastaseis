@@ -3,8 +3,8 @@ export interface Event {
   title: string;
   category: string;
   description: string;
-  image: string;
-  header_image: string;
+  simpleImage: string;
+  coverImage: string;
   location: string;
   url: string;
 }
