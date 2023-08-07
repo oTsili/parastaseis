@@ -5,4 +5,5 @@ export interface Ticket {
   date: string;
   socialType: string;
   event: string;
+  _id?: string;
 }

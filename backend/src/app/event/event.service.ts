@@ -18,4 +18,12 @@ export class EventService {
   async findTicketsByEvent(event: string) {
     return this.ticketModel.find({ event });
   }
+
+  async updateTicket(event: string, socialType: string, seats: any) {
+    return this.ticketModel.findOneAndUpdate(
+      { event, socialType },
+      { seats },
+      { new: true }, // Return the updated document instead of the old one
+    );
+  }
 }

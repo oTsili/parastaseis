@@ -5,6 +5,7 @@ import {
   HttpStatus,
   Param,
   Post,
+  Put,
   Req,
   Res,
   UploadedFile,
@@ -54,9 +55,6 @@ export class EventController {
     @UploadedFiles() files,
     @Body() createEventDto: CreateEventDto,
   ) {
-    console.log(createEventDto);
-    console.log(files);
-
     createEventDto.coverImage = files[0].path;
     createEventDto.simpleImage = files[1].path;
 
@@ -77,8 +75,6 @@ export class EventController {
 
   @Post('ticket')
   async saveTicket(@Body() createTicketDto: CreateTicketDto, @Res() res) {
-    console.log(createTicketDto);
-
     const ticket = new this.eventService.ticketModel(createTicketDto);
 
     await ticket.save();
@@ -91,21 +87,32 @@ export class EventController {
   }
 
   @Get('ticket/:event')
-  async fetchTickets(@Req() req, @Res() res, @Param() param) {
+  async fetchEventTickets(@Req() req, @Res() res, @Param() param) {
     const event = param.event;
     const tickets = await this.eventService.findTicketsByEvent(event);
 
-    console.log({ tickets });
-
     return res.status(HttpStatus.OK).json({ tickets });
+  }
+
+  @Put('ticket/:event')
+  async updateTicket(@Param() param, @Res() res, @Body() updatedData: any) {
+    const event = param.event;
+    const socialType = updatedData.socialType;
+    const seats = updatedData.seats;
+
+    const updatedDocument = await this.eventService.updateTicket(
+      event,
+      socialType,
+      seats.toString(),
+    );
+
+    return res.status(HttpStatus.OK).json({ updatedDocument });
   }
 
   @Get(':category')
   async fetchAccount(@Req() req, @Res() res, @Param() param) {
     const category = param.category;
     const events = await this.eventService.findEventsByCategory(category);
-
-    console.log({ events });
 
     return res.status(HttpStatus.OK).json({ events });
   }

@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { ShippingInformationService } from './shipping-information.service';
 import { Event } from '../../interfaces/event.interface';
 import { Shipping } from '../../interfaces/shipping.interface';
+import { ReservationPageService } from '../reservation-page.service';
 
 @Component({
   selector: 'app-shipping-information',
@@ -39,7 +40,8 @@ export class ShippingInformationComponent {
   constructor(
     private renderer: Renderer2,
     private router: Router,
-    private shippingInformationService: ShippingInformationService
+    private shippingInformationService: ShippingInformationService,
+    private reservationPageService: ReservationPageService
   ) {}
 
   ngOnInit() {
@@ -210,8 +212,19 @@ export class ShippingInformationComponent {
   }
 
   printTicket(event: Event, ticket: Ticket, userInformation: Shipping) {
-    this.router.navigate([`${event.url}/printTicket`], {
-      state: { data: { event: this.event, ticket, userInformation } },
-    });
+    let seats = +ticket.seats - 1;
+    this.reservationPageService
+      .updateTicket(event._id, ticket.socialType, seats)
+      .subscribe({
+        next: (response) => {
+          console.log(response);
+          this.router.navigate([`${event.url}/printTicket`], {
+            state: { data: { event: this.event, ticket, userInformation } },
+          });
+        },
+        error: (error) => {
+          console.error(error);
+        },
+      });
   }
 }

@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./admin.component.scss'],
 })
 export class AdminComponent {
-  isOpen = false;
+  isOpen = true;
 
   toggleVisibility() {
     this.isOpen = !this.isOpen;

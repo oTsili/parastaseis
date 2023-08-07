@@ -12,8 +12,6 @@ export class ReservationPageComponent implements OnInit {
   ticket: Ticket;
   data: { event: Event; ticket: Ticket };
 
-  ticketsLeft: number = 100; // Replace this with the actual tickets left for the event
-
   constructor() {}
 
   ngOnInit() {
