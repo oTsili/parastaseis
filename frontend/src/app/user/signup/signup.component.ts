@@ -58,14 +58,12 @@ export class SignupComponent implements OnInit, OnDestroy {
 
   signup(form: FormGroup) {
     this.isSubmitted = true;
-    console.log(form);
     if (form.invalid) {
       console.log('invalid form');
       return;
     }
 
     this.signupDate = this.appService.getDateString();
-    console.log(this.signupDate);
 
     // this.isLoading = true;
 
@@ -78,12 +76,9 @@ export class SignupComponent implements OnInit, OnDestroy {
       passwordConfirm: form.value.passwordsForm.passwordConfirm,
     };
 
-    console.log(user);
-
     this.signupSubscription = this.authService.onSignup(user).subscribe(
       {
         next: (c) => {
-          console.log(c);
           this.router.navigate(['/']);
           // this.userAppService.onToggleModal();
         },

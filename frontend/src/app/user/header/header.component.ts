@@ -72,12 +72,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   checkAuth() {
-    console.log('testAuth');
     this.authSubscription = this.authService
       .isAuthenticated()
-      .subscribe((response) => {
-        console.log(response);
-      });
+      .subscribe((response) => {});
   }
 
   menuItems: MenuItem[] = [

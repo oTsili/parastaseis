@@ -51,10 +51,10 @@ export class LoginComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (response) => {
           this.errorReturned = false;
-          console.log({ response });
-          this.router.navigate(['/']);
+          const user = response.user;
 
-          // localStorage.setItem('user', JSON.stringify(response));
+          localStorage.setItem('userId', JSON.stringify(user._id));
+          this.router.navigate(['/']);
         },
         error: (error) => {
           // console.log(error);

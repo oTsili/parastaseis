@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Event } from '../interfaces/event.interface';
+import { CEvent } from '../interfaces/event.interface';
 
 const BACKEND_URL = environment.BASE_URL;
 
@@ -19,7 +19,7 @@ export class TheatrePageService {
       })
       .pipe(
         map((response) => {
-          response.events.forEach((event: Event) => {
+          response.events.forEach((event: CEvent) => {
             event.coverImage = `${BACKEND_URL.replace(
               '/api',
               ''

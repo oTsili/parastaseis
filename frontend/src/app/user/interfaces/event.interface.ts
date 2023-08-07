@@ -1,4 +1,4 @@
-export interface Event {
+export interface CEvent {
   date: string;
   title: string;
   category: string;

@@ -18,7 +18,6 @@ export class TheatreService {
     // headers.append('Content-Type', 'multipart/form-data');
     // headers.append('Accept', 'application/json');
     // let options = new RequestOptions({ headers: headers });
-    console.log(ticket);
     return this.httpClient
       .post<any>(`${BACKEND_URL}/event/ticket`, ticket, {
         withCredentials: true,
@@ -32,7 +31,6 @@ export class TheatreService {
       )
       .pipe(
         map((fileData) => {
-          console.log(fileData);
           return fileData;
         })
       );
@@ -51,18 +49,6 @@ export class TheatreService {
       simpleImage,
     } = event;
 
-    console.log(
-      title,
-      availableTickets,
-      category,
-      url,
-      description,
-      date,
-      location,
-      coverImage,
-      simpleImage
-    );
-
     const formData = new FormData();
     formData.append('title', title);
     formData.append('availableTickets', availableTickets);
@@ -80,7 +66,6 @@ export class TheatreService {
     // headers.append('Content-Type', 'multipart/form-data');
     // headers.append('Accept', 'application/json');
     // let options = new RequestOptions({ headers: headers });
-    console.log(formData);
     return this.httpClient
       .post<any>(`${BACKEND_URL}/event`, formData, {
         withCredentials: true,
@@ -94,7 +79,6 @@ export class TheatreService {
       )
       .pipe(
         map((fileData) => {
-          console.log(fileData);
           return fileData;
         })
       );

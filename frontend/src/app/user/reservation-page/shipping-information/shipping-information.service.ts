@@ -12,13 +12,11 @@ const BACKEND_URL = environment.BASE_URL + '/user';
 export class ShippingInformationService {
   constructor(private httpClient: HttpClient) {}
 
-  onSubmit(shipping: Shipping) {
-    console.log({ ...shipping });
-
+  onSubmit(shipping: Shipping, ticket: any, user: any) {
     return this.httpClient
       .post<any>(
         `${BACKEND_URL}/shipping`,
-        { ...shipping },
+        { ...shipping, ticket, user },
         {
           withCredentials: true,
         }
@@ -32,7 +30,6 @@ export class ShippingInformationService {
       )
       .pipe(
         map((shippingData) => {
-          console.log(shippingData);
           return shippingData;
         })
       );

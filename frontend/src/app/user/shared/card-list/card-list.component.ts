@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Ticket } from '../../interfaces/Ticket.interface';
-import { Event } from '../../interfaces/event.interface';
+import { CEvent } from '../../interfaces/event.interface';
 
 @Component({
   selector: 'app-card-list',
@@ -9,7 +9,7 @@ import { Event } from '../../interfaces/event.interface';
   styleUrls: ['./card-list.component.scss'],
 })
 export class CardListComponent {
-  @Input() events: Event[];
+  @Input() events: CEvent[];
 
   constructor(private router: Router) {}
 

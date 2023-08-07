@@ -19,9 +19,18 @@
       </div>
       <div class="item link" routerLink="/theatre">θέατρο</div>
       <div
+        *ngIf="isAuthenticated$ | async"
+        class="item link"
+        routerLink="/mytickets"
+        routerLinkActive="active"
+      >
+        Τα εσιτήρια μου
+      </div>
+      <div
         *ngIf="!(isAuthenticated$ | async)"
         class="item link"
         routerLink="/login"
+        routerLinkActive="active"
       >
         Login
       </div>
@@ -37,6 +46,7 @@
         *ngIf="!(isAuthenticated$ | async)"
         class="item link"
         routerLink="/signup"
+        routerLinkActive="active"
       >
         Signup
       </div>

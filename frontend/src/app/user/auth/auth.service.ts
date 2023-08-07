@@ -30,7 +30,7 @@ export class AuthService {
 
   onLogin(email: string, password: string) {
     return this.httpClient
-      .post<User>(
+      .post<any>(
         `${BACKEND_URL}/login`,
         { username: email, password },
         {
@@ -47,7 +47,6 @@ export class AuthService {
       )
       .pipe(
         map((userData) => {
-          console.log(userData);
           return userData;
         })
       );
@@ -70,7 +69,6 @@ export class AuthService {
       passwordConfirm: signupAuthData.passwordConfirm,
     };
 
-    console.log(authData);
     return this.httpClient
       .post<User>(`${BACKEND_URL}/signup`, authData, {
         withCredentials: true,
@@ -85,7 +83,6 @@ export class AuthService {
       )
       .pipe(
         map((userData) => {
-          console.log(userData);
           return userData;
         })
       );

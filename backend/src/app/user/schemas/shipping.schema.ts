@@ -1,5 +1,5 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
-import { Document, Types } from 'mongoose';
+import { Document, Schema as MongooseSchema, Types } from 'mongoose';
 
 export type ShippingDocument = Shipping & Document;
 
@@ -23,38 +23,44 @@ export class Shipping {
   @Prop({ required: true })
   shippingTown: string;
 
-  @Prop({ required: true })
-  cardType: string;
+  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Ticket', required: false })
+  ticket: Types.ObjectId;
 
-  @Prop({ required: true })
-  cardNumber: string;
+  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'User', required: false })
+  user: Types.ObjectId;
 
-  @Prop({ required: true })
-  cardCvc: string;
+  // @Prop({ required: true })
+  // cardType: string;
 
-  @Prop({ required: true })
-  expirationDate: string;
+  // @Prop({ required: true })
+  // cardNumber: string;
 
-  @Prop({ required: true })
-  asShipping: boolean;
+  // @Prop({ required: true })
+  // cardCvc: string;
 
-  @Prop({ required: false })
-  receiptUsername: string;
+  // @Prop({ required: true })
+  // expirationDate: string;
 
-  @Prop({ required: false })
-  receiptLastname: string;
+  // @Prop({ required: true })
+  // asShipping: boolean;
 
-  @Prop({ required: false })
-  receiptAddress: string;
+  // @Prop({ required: false })
+  // receiptFirstname: string;
 
-  @Prop({ required: false })
-  receiptPostalcode: string;
+  // @Prop({ required: false })
+  // receiptLastname: string;
 
-  @Prop({ required: false })
-  receiptCity: string;
+  // @Prop({ required: false })
+  // receiptAddress: string;
 
-  @Prop({ required: false })
-  receiptTown: string;
+  // @Prop({ required: false })
+  // receiptPostalcode: string;
+
+  // @Prop({ required: false })
+  // receiptCity: string;
+
+  // @Prop({ required: false })
+  // receiptTown: string;
 
   _id?: Types.ObjectId;
 }

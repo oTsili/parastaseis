@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { Event } from '../../interfaces/event.interface';
+import { CEvent } from '../../interfaces/event.interface';
 
 @Component({
   selector: 'app-multi-item-carousel',
@@ -8,7 +8,7 @@ import { Event } from '../../interfaces/event.interface';
   styleUrls: ['./multi-item-carousel.component.scss'],
 })
 export class MultiItemCarouselComponent {
-  @Input() events: Event[];
+  @Input() events: CEvent[];
   @Input() title: { first: string; secondary: string };
 
   constructor(private router: Router, private elementRef: ElementRef) {}

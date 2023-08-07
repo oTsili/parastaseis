@@ -17,6 +17,18 @@ const routes: Routes = [
   //   },
   // },
   {
+    path: 'mytickets',
+    loadChildren: () =>
+      import('./mytickets/mytickets.module').then((m) => m.MyticketsModule),
+    data: {
+      title: 'my-tickets',
+      breadcrumb: {
+        label: 'my-tickets',
+        url: 'my-tickets',
+      },
+    },
+  },
+  {
     path: 'theatre',
     loadChildren: () =>
       import('./theatre-page/theatre-page.module').then(

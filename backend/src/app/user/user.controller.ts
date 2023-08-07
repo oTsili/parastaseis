@@ -8,6 +8,7 @@ import {
   Req,
   Res,
   Session,
+  Param,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
@@ -32,14 +33,12 @@ export class UserController {
       loginDto.username,
       loginDto.password,
     );
-    console.log(loginDto);
     if (!user) {
       throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED);
     }
     const accessToken = this.authService.generateAccessToken(user);
     session.jwt = accessToken;
 
-    console.log(user);
     return { user };
   }
 
@@ -51,7 +50,6 @@ export class UserController {
 
   @Post('signup')
   async register(@Body() createUserDto: CreateUserDto): Promise<User> {
-    console.log(createUserDto);
     const user = new this.authService.userModel(createUserDto);
     return user.save();
   }
@@ -62,7 +60,6 @@ export class UserController {
     @Res() res,
     @Session() session: Record<string, any>,
   ) {
-    console.log(session);
     let isAuth = true;
     if (!session.jwt) {
       isAuth = false;
@@ -75,7 +72,6 @@ export class UserController {
 
   @Post('/shipping')
   async registerShipping(@Body() createShippingDto: CreateShippingDto) {
-    console.log(createShippingDto);
     const shipping = new this.userService.shippingModel(createShippingDto);
     // Create a new object with only the desired properties
     const responseObj = {
@@ -87,5 +83,22 @@ export class UserController {
     await shipping.save();
 
     return responseObj; // Send the filtered object to the frontend
+  }
+
+  @Get('/shipping/:user')
+  async getShipping(@Req() req, @Res() res, @Param() param) {
+    const user = param.user.replace(/"/g, '');
+    console.log({ user });
+
+    const shippings = await this.userService.findTickets(user);
+
+    // // Exclude the password field from each user object in the tickets array
+    // const ticketsWithoutPasswords = tickets.map((ticket) => {
+    //   const userWithoutPassword = { ...ticket.user };
+    //   delete userWithoutPassword.password;
+    //   return { ...ticket, user: userWithoutPassword };
+    // });
+
+    return res.status(HttpStatus.OK).json({ shippings });
   }
 }

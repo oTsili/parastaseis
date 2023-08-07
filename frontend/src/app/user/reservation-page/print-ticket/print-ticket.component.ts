@@ -11,7 +11,7 @@ import html2canvas from 'html2canvas';
 import { Ticket } from '../../interfaces/Ticket.interface';
 import * as QRCode from 'qrcode';
 import { Shipping } from '../../interfaces/shipping.interface';
-import { Event } from '../../interfaces/event.interface';
+import { CEvent } from '../../interfaces/event.interface';
 
 @Component({
   selector: 'app-print-ticket',
@@ -20,8 +20,8 @@ import { Event } from '../../interfaces/event.interface';
 })
 export class PrintTicketComponent implements OnInit, AfterViewInit {
   ticketsLeft: number = 100; // Replace this with the actual tickets left for the event
-  data: { event: Event; ticket: Ticket; userInformation: Shipping };
-  event: Event;
+  data: { event: CEvent; ticket: Ticket; userInformation: Shipping };
+  event: CEvent;
   ticket: Ticket;
   shippingInformation: Shipping;
   randomString: string;

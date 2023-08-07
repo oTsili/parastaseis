@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TheatrePageService } from '../../theatre-page/theatre-page.service';
 import { Subscription } from 'rxjs';
-import { Event } from '../../interfaces/event.interface';
+import { CEvent } from '../../interfaces/event.interface';
 
 @Component({
   selector: 'app-theatre',
@@ -15,14 +15,13 @@ export class TheatreComponent implements OnInit {
   };
 
   eventsSubscription: Subscription;
-  events: Event[];
+  events: CEvent[];
 
   constructor(private theatrePageService: TheatrePageService) {}
 
   ngOnInit(): void {
     this.eventsSubscription = this.theatrePageService.onGetEvents().subscribe({
       next: (response) => {
-        console.log(response);
         this.events = response.events;
       },
       error: (error) => {

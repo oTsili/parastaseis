@@ -104,7 +104,6 @@ export class EventComponent {
   submit(form: FormGroup) {
     this.isSubmitted = true;
 
-    console.log(form);
     if (form.invalid) {
       console.log('form is invalid!');
       return;
@@ -128,7 +127,6 @@ export class EventComponent {
       .onSubmitEvent(event)
       .subscribe({
         next: (response) => {
-          console.log(response);
           this.theatreForm.reset();
           this.resetForm();
           this.isSubmitted = false;

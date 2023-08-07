@@ -4,7 +4,7 @@ import { Ticket } from '../../interfaces/Ticket.interface';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ShippingInformationService } from './shipping-information.service';
-import { Event } from '../../interfaces/event.interface';
+import { CEvent } from '../../interfaces/event.interface';
 import { Shipping } from '../../interfaces/shipping.interface';
 import { ReservationPageService } from '../reservation-page.service';
 
@@ -22,9 +22,9 @@ export class ShippingInformationComponent {
 
   isOpen = false;
   isChecked = false;
-  event: Event;
+  event: CEvent;
   ticket: Ticket;
-  data: { event: Event; ticket: Ticket };
+  data: { event: CEvent; ticket: Ticket };
   cardTypes = [
     { title: 'Visa', value: 'visa' },
     { title: 'American Express', value: 'amex' },
@@ -36,6 +36,7 @@ export class ShippingInformationComponent {
   isSubmitted = false;
   submitSubsciption: Subscription;
   errorReturned = false;
+  userId: string;
 
   constructor(
     private renderer: Renderer2,
@@ -48,6 +49,7 @@ export class ShippingInformationComponent {
     this.data = history.state?.data;
     this.event = this.data.event;
     this.ticket = this.data.ticket;
+    this.userId = localStorage.getItem('userId')!.replace(/"/g, '');
 
     this.shippingForm = new FormGroup({
       firstname: new FormControl(null, {
@@ -80,27 +82,27 @@ export class ShippingInformationComponent {
       expirationDate: new FormControl(null, {
         validators: [Validators.required],
       }),
-      asShipping: new FormControl(false, {
-        validators: [Validators.required],
-      }),
-      receiptFirstname: new FormControl(null, {
-        validators: [Validators.required],
-      }),
-      receiptLastname: new FormControl(null, {
-        validators: [Validators.required],
-      }),
-      receiptAddress: new FormControl(null, {
-        validators: [Validators.required],
-      }),
-      receiptPostalcode: new FormControl(null, {
-        validators: [Validators.required],
-      }),
-      receiptCity: new FormControl(null, {
-        validators: [Validators.required],
-      }),
-      receiptTown: new FormControl(null, {
-        validators: [Validators.required],
-      }),
+      // asShipping: new FormControl(false, {
+      //   validators: [Validators.required],
+      // }),
+      // receiptFirstname: new FormControl(null, {
+      //   validators: [Validators.required],
+      // }),
+      // receiptLastname: new FormControl(null, {
+      //   validators: [Validators.required],
+      // }),
+      // receiptAddress: new FormControl(null, {
+      //   validators: [Validators.required],
+      // }),
+      // receiptPostalcode: new FormControl(null, {
+      //   validators: [Validators.required],
+      // }),
+      // receiptCity: new FormControl(null, {
+      //   validators: [Validators.required],
+      // }),
+      // receiptTown: new FormControl(null, {
+      //   validators: [Validators.required],
+      // }),
     });
   }
 
@@ -119,36 +121,36 @@ export class ShippingInformationComponent {
       postalCode: form.value.postalCode,
       shippingCity: form.value.shippingCity,
       shippingTown: form.value.shippingTown,
-      cardType: form.value.cardType,
-      cardNumber: form.value.cardNumber,
-      cardCvc: form.value.cardCvc,
-      expirationDate: `${this.cardMonth.nativeElement.value}/${form.value.expirationDate}`,
-      asShipping: this.isChecked,
-      receiptFirstname: form.value.receiptFirstname,
-      receiptLastname: form.value.receiptLastname,
-      receiptAddress: form.value.receiptAddress,
-      receiptPostalcode: form.value.receiptPostalcode,
-      receiptCity: form.value.receiptCity,
-      receiptTown: form.value.receiptTown,
+      // cardType: form.value.cardType,
+      // cardNumber: form.value.cardNumber,
+      // cardCvc: form.value.cardCvc,
+      // expirationDate: `${this.cardMonth.nativeElement.value}/${form.value.expirationDate}`,
+      // asShipping: this.isChecked,
+      // receiptFirstname: form.value.receiptFirstname,
+      // receiptLastname: form.value.receiptLastname,
+      // receiptAddress: form.value.receiptAddress,
+      // receiptPostalcode: form.value.receiptPostalcode,
+      // receiptCity: form.value.receiptCity,
+      // receiptTown: form.value.receiptTown,
     };
 
     // if asShipping button is checked, then assign the shipping values to the receipt values
-    if (this.isChecked) {
-      shipping.receiptFirstname = shipping.firstname;
-      shipping.receiptLastname = shipping.lastname;
-      shipping.receiptAddress = shipping.shippingAddress;
-      shipping.receiptPostalcode = shipping.postalCode;
-      shipping.receiptCity = shipping.shippingCity;
-      shipping.receiptTown = shipping.shippingTown;
-    }
+    // if (this.isChecked) {
+    //   shipping.receiptFirstname = shipping.firstname;
+    //   shipping.receiptLastname = shipping.lastname;
+    //   shipping.receiptAddress = shipping.shippingAddress;
+    //   shipping.receiptPostalcode = shipping.postalCode;
+    //   shipping.receiptCity = shipping.shippingCity;
+    //   shipping.receiptTown = shipping.shippingTown;
+    // }
 
     // this.isLoading = true;
+
+    console.log(this.userId);
     this.submitSubsciption = this.shippingInformationService
-      .onSubmit(shipping)
+      .onSubmit(shipping, this.ticket._id, this.userId)
       .subscribe({
         next: (response) => {
-          console.log({ response });
-
           this.printTicket(this.event, this.ticket, response);
           // localStorage.setItem('user', JSON.stringify(response));
         },
@@ -167,25 +169,25 @@ export class ShippingInformationComponent {
     this.isOpen = !this.isOpen;
   }
 
-  toggleChecked() {
-    this.isChecked = !this.isChecked;
+  // toggleChecked() {
+  //   this.isChecked = !this.isChecked;
 
-    if (this.isChecked) {
-      this.shippingForm.get('receiptFirstname')?.disable();
-      this.shippingForm.get('receiptLastname')?.disable();
-      this.shippingForm.get('receiptAddress')?.disable();
-      this.shippingForm.get('receiptPostalcode')?.disable();
-      this.shippingForm.get('receiptCity')?.disable();
-      this.shippingForm.get('receiptTown')?.disable();
-    } else {
-      this.shippingForm.get('receiptFirstname')?.enable();
-      this.shippingForm.get('receiptLastname')?.enable();
-      this.shippingForm.get('receiptAddress')?.enable();
-      this.shippingForm.get('receiptPostalcode')?.enable();
-      this.shippingForm.get('receiptCity')?.enable();
-      this.shippingForm.get('receiptTown')?.enable();
-    }
-  }
+  //   if (this.isChecked) {
+  //     this.shippingForm.get('receiptFirstname')?.disable();
+  //     this.shippingForm.get('receiptLastname')?.disable();
+  //     this.shippingForm.get('receiptAddress')?.disable();
+  //     this.shippingForm.get('receiptPostalcode')?.disable();
+  //     this.shippingForm.get('receiptCity')?.disable();
+  //     this.shippingForm.get('receiptTown')?.disable();
+  //   } else {
+  //     this.shippingForm.get('receiptFirstname')?.enable();
+  //     this.shippingForm.get('receiptLastname')?.enable();
+  //     this.shippingForm.get('receiptAddress')?.enable();
+  //     this.shippingForm.get('receiptPostalcode')?.enable();
+  //     this.shippingForm.get('receiptCity')?.enable();
+  //     this.shippingForm.get('receiptTown')?.enable();
+  //   }
+  // }
 
   previous() {
     this.router.navigate([`${this.event.url}/tickets`], {
@@ -211,13 +213,12 @@ export class ShippingInformationComponent {
     );
   }
 
-  printTicket(event: Event, ticket: Ticket, userInformation: Shipping) {
+  printTicket(event: CEvent, ticket: Ticket, userInformation: Shipping) {
     let seats = +ticket.seats - 1;
     this.reservationPageService
       .updateTicket(event._id, ticket.socialType, seats)
       .subscribe({
         next: (response) => {
-          console.log(response);
           this.router.navigate([`${event.url}/printTicket`], {
             state: { data: { event: this.event, ticket, userInformation } },
           });

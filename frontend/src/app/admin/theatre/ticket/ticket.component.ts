@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { Event } from 'src/app/user/interfaces/event.interface';
+import { CEvent } from 'src/app/user/interfaces/event.interface';
 import { TheatrePageService } from 'src/app/user/theatre-page/theatre-page.service';
 import { TheatreService } from '../theatre.service';
 
@@ -22,7 +22,7 @@ export class TicketComponent implements OnInit, OnDestroy {
   errorReturned = false;
   eventsSubscription: Subscription;
   submitSubscription: Subscription;
-  events: Event[];
+  events: CEvent[];
   @ViewChild('month') month: ElementRef;
   @ViewChild('socialType') socialType: ElementRef;
   @ViewChild('event') event: ElementRef;
@@ -75,7 +75,6 @@ export class TicketComponent implements OnInit, OnDestroy {
   submit(form: FormGroup) {
     this.isSubmitted = true;
 
-    console.log(form);
     if (form.invalid) {
       console.log('form is invalid!');
       return;
@@ -94,7 +93,6 @@ export class TicketComponent implements OnInit, OnDestroy {
       .onSubmitTicket(ticket)
       .subscribe({
         next: (response) => {
-          console.log(response);
           this.ticketForm.reset();
           this.resetForm();
           this.isSubmitted = false;

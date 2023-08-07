@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Ticket } from '../../interfaces/Ticket.interface';
-import { Event } from '../../interfaces/event.interface';
+import { CEvent } from '../../interfaces/event.interface';
 import { Subscription } from 'rxjs';
 import { TheatrePageService } from '../../theatre-page/theatre-page.service';
 
@@ -11,8 +11,8 @@ import { TheatrePageService } from '../../theatre-page/theatre-page.service';
   styleUrls: ['./tickets.component.scss'],
 })
 export class TicketsComponent implements OnInit {
-  event: Event;
-  data: { event: Event; ticket: Ticket };
+  event: CEvent;
+  data: { event: CEvent; ticket: Ticket };
   tickets: Ticket[];
   ticketSubscription: Subscription;
 
@@ -29,7 +29,6 @@ export class TicketsComponent implements OnInit {
       .onGetTickets(this.event._id)
       .subscribe({
         next: (response) => {
-          console.log(response);
           this.tickets = response.tickets;
         },
         error: (error) => {
@@ -38,7 +37,7 @@ export class TicketsComponent implements OnInit {
       });
   }
 
-  buyTicket(event: Event, ticket: Ticket) {
+  buyTicket(event: CEvent, ticket: Ticket) {
     this.router.navigate([`${event.url}/shippingInformation`], {
       state: { data: { event: this.event, ticket } },
     });

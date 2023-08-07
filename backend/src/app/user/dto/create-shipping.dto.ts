@@ -1,4 +1,5 @@
 import { IsNotEmpty, IsString } from 'class-validator';
+import { Types } from 'mongoose';
 
 export class CreateShippingDto {
   @IsNotEmpty()
@@ -41,31 +42,37 @@ export class CreateShippingDto {
   @IsString()
   expirationDate: string;
 
-  @IsNotEmpty()
   @IsString()
-  asShipping: boolean;
+  ticket: Types.ObjectId;
 
-  @IsNotEmpty()
   @IsString()
-  receiptUsername: string;
+  user: Types.ObjectId;
 
-  @IsNotEmpty()
-  @IsString()
-  receiptLastname: string;
+  // @IsNotEmpty()
+  // @IsString()
+  // asShipping: boolean;
 
-  @IsNotEmpty()
-  @IsString()
-  receiptAddress: string;
+  // @IsNotEmpty()
+  // @IsString()
+  // receiptFirstname: string;
 
-  @IsNotEmpty()
-  @IsString()
-  receiptPostalcode: string;
+  // @IsNotEmpty()
+  // @IsString()
+  // receiptLastname: string;
 
-  @IsNotEmpty()
-  @IsString()
-  receiptCity: string;
+  // @IsNotEmpty()
+  // @IsString()
+  // receiptAddress: string;
 
-  @IsNotEmpty()
-  @IsString()
-  receiptTown: string;
+  // @IsNotEmpty()
+  // @IsString()
+  // receiptPostalcode: string;
+
+  // @IsNotEmpty()
+  // @IsString()
+  // receiptCity: string;
+
+  // @IsNotEmpty()
+  // @IsString()
+  // receiptTown: string;
 }

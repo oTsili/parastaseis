@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Ticket } from '../interfaces/Ticket.interface';
-import { Event } from '../interfaces/event.interface';
+import { CEvent } from '../interfaces/event.interface';
 
 @Component({
   selector: 'app-reservation-page',
@@ -8,9 +8,9 @@ import { Event } from '../interfaces/event.interface';
   styleUrls: ['./reservation-page.component.scss'],
 })
 export class ReservationPageComponent implements OnInit {
-  event: Event;
+  event: CEvent;
   ticket: Ticket;
-  data: { event: Event; ticket: Ticket };
+  data: { event: CEvent; ticket: Ticket };
 
   constructor() {}
 

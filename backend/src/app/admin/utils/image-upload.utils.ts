@@ -34,7 +34,6 @@ export const editFileName = (req, file, callback) => {
 //   }
 // }
 function getDestinationPath(file) {
-  console.log(file);
   if (file.originalname.startsWith('cover')) {
     return './static/uploads/coverImages';
   } else if (file.originalname.startsWith('simple')) {
