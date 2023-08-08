@@ -52,16 +52,15 @@ export class LoginComponent implements OnInit, OnDestroy {
         next: (response) => {
           this.errorReturned = false;
           const user = response.user;
+          this.authService.onUpdateAuthStatus(true);
 
           localStorage.setItem('userId', JSON.stringify(user._id));
           this.router.navigate(['/']);
         },
         error: (error) => {
-          // console.log(error);
-          let errorMessage = error.error.message;
+          console.error(error);
+          this.authService.onUpdateAuthStatus(false);
           this.errorReturned = true;
-          // .split(':')[1].trim();
-          console.log(errorMessage);
         },
       });
     // this.isLoading = false;

@@ -89,23 +89,9 @@ export class AuthService {
   }
 
   onLogout() {
-    return this.httpClient
-      .get<void>(`${BACKEND_URL}/logout`, {
-        withCredentials: true,
-      })
-      .pipe(
-        tap(() => {
-          // update the isAuthenticated variable with false (LOGOUT)
-          // inform the observers that the user's account information are NOT available
-          this.onUpdateAuthStatus(false);
-        })
-      )
-      .pipe(
-        map((userData) => {
-          // console.log({ userData });
-          return userData;
-        })
-      );
+    return this.httpClient.get<void>(`${BACKEND_URL}/logout`, {
+      withCredentials: true,
+    });
   }
 
   /**
@@ -113,32 +99,13 @@ export class AuthService {
    * if the isAuthenticated is false, after reaching the backend
    */
   isAuthenticated() {
-    return this.httpClient
-      .get<{
-        userId: string;
-        email: string;
-        // account: Account;
-      }>(`${BACKEND_URL}/isAuth`, {
-        withCredentials: true,
-      })
-      .pipe(
-        tap(() => {
-          this.onUpdateAuthStatus(true);
-        })
-      )
-      .pipe(
-        map((userData) => {
-          const user = {
-            // id: userData.userId,
-            // email: userData.email,
-            // account: userData.account,
-          };
-          // save user info to the browser's storage
-          localStorage.setItem('user', JSON.stringify(user));
-
-          return user;
-        })
-      );
+    return this.httpClient.get<{
+      userId: string;
+      email: string;
+      // account: Account;
+    }>(`${BACKEND_URL}/isAuth`, {
+      withCredentials: true,
+    });
   }
 
   // getAuthToken(): string {

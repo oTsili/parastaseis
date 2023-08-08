@@ -78,9 +78,13 @@ export class SignupComponent implements OnInit, OnDestroy {
 
     this.signupSubscription = this.authService.onSignup(user).subscribe(
       {
-        next: (c) => {
+        next: (response) => {
+          // this.authService.onUpdateAuthStatus(true);
           this.router.navigate(['/']);
           // this.userAppService.onToggleModal();
+        },
+        error: (error) => {
+          console.error(error);
         },
       }
       // (data) => {
