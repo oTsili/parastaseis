@@ -51,7 +51,7 @@ export class PrintTicketComponent implements OnInit, AfterViewInit {
       if (error) {
         console.error('Error generating QR code:', error);
       } else {
-        console.log('QR code generated successfully!');
+        // console.log('QR code generated successfully!');
       }
     });
   }

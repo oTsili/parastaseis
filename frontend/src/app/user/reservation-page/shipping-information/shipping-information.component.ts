@@ -36,7 +36,7 @@ export class ShippingInformationComponent {
   isSubmitted = false;
   submitSubsciption: Subscription;
   errorReturned = false;
-  userId: string;
+  userId = localStorage.getItem('userId');
 
   constructor(
     private renderer: Renderer2,
@@ -49,7 +49,7 @@ export class ShippingInformationComponent {
     this.data = history.state?.data;
     this.event = this.data.event;
     this.ticket = this.data.ticket;
-    this.userId = localStorage.getItem('userId')!.replace(/"/g, '');
+    if (this.userId) this.userId.replace(/"/g, '');
 
     this.shippingForm = new FormGroup({
       firstname: new FormControl(null, {
@@ -146,7 +146,6 @@ export class ShippingInformationComponent {
 
     // this.isLoading = true;
 
-    console.log(this.userId);
     this.submitSubsciption = this.shippingInformationService
       .onSubmit(shipping, this.ticket._id, this.userId)
       .subscribe({
@@ -155,11 +154,9 @@ export class ShippingInformationComponent {
           // localStorage.setItem('user', JSON.stringify(response));
         },
         error: (error) => {
-          // console.log(error);
-          let errorMessage = error.error.message;
           this.errorReturned = true;
           // .split(':')[1].trim();
-          console.log(errorMessage);
+          console.error(error);
         },
       });
     // this.isLoading = false;

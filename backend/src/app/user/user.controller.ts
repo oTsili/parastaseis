@@ -88,7 +88,6 @@ export class UserController {
   @Get('/shipping/:user')
   async getShipping(@Req() req, @Res() res, @Param() param) {
     const user = param.user.replace(/"/g, '');
-    console.log({ user });
 
     const shippings = await this.userService.findTickets(user);
 

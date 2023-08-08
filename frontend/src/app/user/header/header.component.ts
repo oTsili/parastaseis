@@ -70,8 +70,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.authService.onLogout().subscribe({
       next: (response) => {
         this.authService.onUpdateAuthStatus(false);
+        localStorage.removeItem('userId');
         // this.router.navigateByUrl('/login');
-        console.log(response);
       },
       error: (error) => {
         console.error(error);
