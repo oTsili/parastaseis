@@ -11,8 +11,7 @@ import { EventModule } from './app/event/event.module';
     UserModule,
     PassportModule,
     MongooseModule.forRoot(
-      'mongodb://127.0.0.1:27017/parastaseis?authSource=admin',
-    ),
+   `${process.env['ME_CONFIG_MONGODB_URL']}/parastaseis?authSource=admin`,    ),
     EventModule,
   ],
   controllers: [AppController],

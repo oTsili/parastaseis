@@ -98,8 +98,8 @@ export class TicketComponent implements OnInit, OnDestroy {
           this.isSubmitted = false;
         },
         error: (error) => {
-          let errorMessage = error.error.message;
-          console.error(errorMessage);
+         
+          console.error(error);
         },
       });
   }
