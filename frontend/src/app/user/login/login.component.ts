@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           const user = response.user;
           this.authService.onUpdateAuthStatus(true);
 
-          localStorage.setItem('userId', JSON.stringify(user._id));
+          localStorage.setItem('userId', JSON.stringify(user._id).replaceAll('"',''));
           this.router.navigate(['/']);
         },
         error: (error) => {

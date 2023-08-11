@@ -16,12 +16,12 @@ export class EventService {
   }
 
   async findTicketsByEvent(event: string) {
-    return this.ticketModel.find({ event });
+    return this.ticketModel.find({ event }).sort({date:1});
   }
 
-  async updateTicket(event: string, socialType: string, seats: any) {
+  async updateTicket(event: string, socialType: string, date:string, time:string, seats: any) {
     return this.ticketModel.findOneAndUpdate(
-      { event, socialType },
+      { event, socialType, date, time },
       { seats },
       { new: true }, // Return the updated document instead of the old one
     );

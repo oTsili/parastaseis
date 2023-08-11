@@ -211,9 +211,8 @@ export class ShippingInformationComponent {
   }
 
   printTicket(event: CEvent, ticket: Ticket, userInformation: Shipping) {
-    let seats = +ticket.seats - 1;
     this.reservationPageService
-      .updateTicket(event._id, ticket.socialType, seats)
+      .updateTicket(event._id, ticket)
       .subscribe({
         next: (response) => {
           this.router.navigate([`${event.url}/printTicket`], {
