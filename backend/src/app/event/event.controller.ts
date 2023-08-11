@@ -97,12 +97,10 @@ export class EventController {
   @Put('ticket/:event')
   async updateTicket(@Param() param, @Res() res, @Body() updatedData: any) {
     const event = param.event;
-    console.log(updatedData.ticket);
     const socialType = updatedData.ticket.socialType;
     const seats = +updatedData.ticket.seats - 1;
-    const date = updatedData.ticket.date.split(' ')[1]
-    const time = updatedData.ticket.date.split(' ')[0]
-
+    const date = updatedData.ticket.date;
+    const time = updatedData.ticket.time;
 
     const updatedDocument = await this.eventService.updateTicket(
       event,

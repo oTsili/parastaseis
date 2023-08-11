@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 networks:
   parastaseis_net:
@@ -7,17 +7,18 @@ networks:
 services:
   parastaseis-frontend:
     image: parastaseis_frontend:latest
+    # image: parastaseis_frontend:dev
     volumes:
       - ./frontend:/app
       - /etc/localtime:/etc/localtime:ro
     networks:
       - parastaseis_net
 
-
   parastaseis-backend:
     image: parastaseis_backend:latest
+    # image: parastaseis_backend:dev
     depends_on:
-      - mongo 
+      - mongo
     volumes:
       - ./backend:/app
       - /etc/localtime:/etc/localtime:ro

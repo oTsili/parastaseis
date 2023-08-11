@@ -16,10 +16,16 @@ export class EventService {
   }
 
   async findTicketsByEvent(event: string) {
-    return this.ticketModel.find({ event }).sort({date:1});
+    return this.ticketModel.find({ event }).sort({ date: 1 });
   }
 
-  async updateTicket(event: string, socialType: string, date:string, time:string, seats: any) {
+  async updateTicket(
+    event: string,
+    socialType: string,
+    date: string,
+    time: string,
+    seats: any,
+  ) {
     return this.ticketModel.findOneAndUpdate(
       { event, socialType, date, time },
       { seats },

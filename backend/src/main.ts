@@ -23,8 +23,8 @@ async function bootstrap() {
   app.useStaticAssets(join(__dirname, '..', 'static'));
 
   app.enableCors({
-    // origin: 'http://localhost:4300',
-    origin: 'parastaseis.webroom.gr',
+    origin: '*',
+    // origin: 'parastaseis.webroom.gr',
     methods: 'GET, PUT, POST, DELETE, PATCH, OPTIONS',
     allowedHeaders:
       'X-Requested-With, Accept, Origin, Referer, User-Agent, Content-Type, Authorization, enctype',
