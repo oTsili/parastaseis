@@ -21,6 +21,7 @@
     "@angular/router": "^16.0.0",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.5.31",
+    "ngx-cookie-service": "^16.0.1",
     "qrcode": "^1.5.3",
     "rxjs": "~7.8.0",
     "semantic-ui-css": "^2.5.0",

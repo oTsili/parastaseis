@@ -13,7 +13,7 @@ const routes: Routes = [
     path: '',
     component: AdminComponent,
     children: [
-      { path: '', redirectTo: 'tickets', pathMatch: 'full' },
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
 
       {
         path: 'home',

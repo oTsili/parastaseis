@@ -26,6 +26,10 @@
         <i class="smile icon"></i>
         Θέατρο
       </a>
+      <a routerLink="/" class="item" (click)="logout()">
+        <i class="power off icon"></i>
+        Αποσύνδεση
+      </a>
     </div>
     <div class="pusher" [ngClass]="{ dimmer: isOpen }">
       <div class="ui basic segment">

@@ -108,6 +108,20 @@ export class AuthService {
     });
   }
 
+  /**
+   * @returns User object if isAdmin is true or 401 error status
+   * if the isAuthenticated is false, after reaching the backend
+   */
+  isAdmin() {
+    return this.httpClient.get<{
+      userId: string;
+      email: string;
+      // account: Account;
+    }>(`${BACKEND_URL}/isAdmin`, {
+      withCredentials: true,
+    });
+  }
+
   // getAuthToken(): string {
   //   return this.token;
   // }

@@ -6,8 +6,8 @@ networks:
 
 services:
   parastaseis-frontend:
-    image: parastaseis_frontend:latest
-    # image: parastaseis_frontend:dev
+    # image: parastaseis_frontend:latest
+    image: parastaseis_frontend:dev
     volumes:
       - ./frontend:/app
       - /etc/localtime:/etc/localtime:ro
@@ -15,8 +15,8 @@ services:
       - parastaseis_net
 
   parastaseis-backend:
-    image: parastaseis_backend:latest
-    # image: parastaseis_backend:dev
+    # image: parastaseis_backend:latest
+    image: parastaseis_backend:dev
     depends_on:
       - mongo
     volumes:
