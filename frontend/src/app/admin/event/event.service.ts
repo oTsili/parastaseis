@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, tap } from 'rxjs';
 import { Ticket } from 'src/app/user/interfaces/Ticket.interface';
+import { CEvent } from 'src/app/user/interfaces/event.interface';
 import { environment } from 'src/environments/environment';
 
 const BACKEND_URL = environment.BASE_URL;
@@ -11,6 +12,28 @@ const BACKEND_URL = environment.BASE_URL;
 })
 export class EventService {
   constructor(private httpClient: HttpClient) {}
+
+  onGetEvents(category: string) {
+    return this.httpClient
+      .get<any>(`${BACKEND_URL}/event/${category}`, {
+        withCredentials: true,
+      })
+      .pipe(
+        map((response) => {
+          response.events.forEach((event: CEvent) => {
+            event.coverImage = `${BACKEND_URL.replace(
+              '/api',
+              ''
+            )}/${event.coverImage.replace('static/', '')}`;
+            event.simpleImage = `${BACKEND_URL.replace(
+              '/api',
+              ''
+            )}/${event.simpleImage.replace('static/', '')}`;
+          });
+          return response;
+        })
+      );
+  }
 
   onSubmitTicket(ticket: Ticket) {
     // let headers = new Headers();

@@ -40,6 +40,30 @@
         />
       </div>
       <div class="six wide field">
+        <label>Κατηγορία</label>
+        <div
+          class="field"
+          [ngClass]="{
+            error: category.value === '' && isSubmitted
+          }"
+        >
+          <select
+            #category
+            class="ui fluid search dropdown"
+            name="month"
+            (change)="getEvents()"
+          >
+            <option value="">Κατηγορία</option>
+            <option value="Movies">Movies</option>
+            <option value="Music">Music</option>
+            <option value="event">event</option>
+            <option value="New">New</option>
+            <option value="Popular">Popular</option>
+            <option value="Recommended">Recommended</option>
+          </select>
+        </div>
+      </div>
+      <div class="six wide field">
         <label>Event</label>
         <div
           class="field"

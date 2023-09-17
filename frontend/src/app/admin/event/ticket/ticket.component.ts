@@ -8,7 +8,6 @@ import {
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { CEvent } from 'src/app/user/interfaces/event.interface';
-import { TheatrePageService } from 'src/app/user/pages/theatre-page/theatre-page.service';
 import { EventService } from '../event.service';
 
 @Component({
@@ -26,11 +25,9 @@ export class TicketComponent implements OnInit, OnDestroy {
   @ViewChild('month') month: ElementRef;
   @ViewChild('socialType') socialType: ElementRef;
   @ViewChild('event') event: ElementRef;
+  @ViewChild('category') category: ElementRef;
 
-  constructor(
-    private theatrePageService: TheatrePageService,
-    private eventService: EventService
-  ) {}
+  constructor(private eventService: EventService) {}
 
   ngOnInit(): void {
     this.ticketForm = new FormGroup({
@@ -51,19 +48,25 @@ export class TicketComponent implements OnInit, OnDestroy {
         validators: [Validators.required],
       }),
     });
-
-    this.eventsSubscription = this.theatrePageService.onGetEvents().subscribe({
-      next: (response) => {
-        this.events = response.events;
-      },
-      error: (error) => {
-        console.error(error);
-      },
-    });
   }
 
   ngOnDestroy(): void {
     this.eventsSubscription.unsubscribe();
+  }
+
+  getEvents() {
+    const category = this.category.nativeElement.value;
+
+    this.eventsSubscription = this.eventService
+      .onGetEvents(category)
+      .subscribe({
+        next: (response) => {
+          this.events = response.events;
+        },
+        error: (error) => {
+          console.error(error);
+        },
+      });
   }
 
   resetForm() {
