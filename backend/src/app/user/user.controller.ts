@@ -11,6 +11,7 @@ import {
   Param,
   UseGuards,
   UnauthorizedException,
+  Put,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
@@ -20,6 +21,8 @@ import { CreateShippingDto } from './dto/create-shipping.dto';
 import { UserService } from './user.service';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { ConfigService } from '@nestjs/config';
+import { Roles } from './custom-decorators/role.decorator';
+import { RoleGuard } from './guards/role.guard';
 // import { RolesGuard } from './guards/role.guard';
 // import { Roles } from './custom-decorators/role.decorator';
 // import { Roles } from './custom-decorators/role.decorator';
@@ -34,6 +37,7 @@ export class UserController {
 
   @Post('login')
   async login(
+    @Req() req,
     @Res() res,
     @Body() loginDto: LoginDto,
     // @Session() session: Record<string, any>,
@@ -43,13 +47,9 @@ export class UserController {
       loginDto.password,
     );
 
-    // const { access_token } = await this.authService.login(user);
     const jwt = this.authService.createJwt(user);
-    console.log({ jwt });
 
     this.authService.setJwtInCookie(jwt, res);
-
-    console.log(res);
 
     return res.status(HttpStatus.OK).json(user);
   }
@@ -60,6 +60,13 @@ export class UserController {
     return await res.status(HttpStatus.OK).json();
   }
 
+  @Get('/all')
+  async getUsers(@Res() res, @Session() session: Record<string, any>) {
+    const users = await this.userService.findAllUsers();
+
+    return await res.status(HttpStatus.OK).json(users);
+  }
+
   @Post('signup')
   async register(@Body() createUserDto: CreateUserDto): Promise<User> {
     const user = new this.authService.userModel(createUserDto);
@@ -68,46 +75,16 @@ export class UserController {
 
   @UseGuards(JwtAuthGuard)
   @Get('isAuth')
-  async validateAuth(
-    @Req() req,
-    @Res() res,
-    // @Session() session: Record<string, any>,
-  ) {
-    // console.log({ session });
-    // let isAuth = true;
-    // if (!session.jwt) {
-    //   // isAuth = false;
-    //   return null;
-    // }
-
-    // console.log({ user: req.user });
-
-    const jwt = req.cookies['jwt'];
-
-    return await res.status(HttpStatus.OK).json(jwt);
+  async validateAuth(@Req() req, @Res() res) {
+    return await res.status(HttpStatus.OK).json({});
   }
 
   @UseGuards(JwtAuthGuard)
-  // @Roles('admin')
+  @UseGuards(RoleGuard)
+  @Roles('admin')
   @Get('isAdmin')
   async validateAdmin(@Req() req, @Res() res) {
-    const payload = this.authService.decodeJwt(req.cookies['jwt']);
-
-    console.log(payload);
-
-    // // console.log({ user: req.user });
-    const jwt = req.cookies['jwt'];
-    const user = this.authService.decodeJwt(jwt);
-
-    console.log({ user });
-
-    if (user.role !== 'admin') {
-      // isAuth = false;
-      // return null;
-      throw new UnauthorizedException('No admin');
-    }
-
-    return await res.status(HttpStatus.OK).json(jwt);
+    return await res.status(HttpStatus.OK).json({});
   }
 
   @Post('/shipping')
@@ -139,5 +116,17 @@ export class UserController {
     // });
 
     return res.status(HttpStatus.OK).json({ shippings });
+  }
+
+  @Put('role/:role')
+  async updateTicket(@Param() param, @Res() res, @Body() updatedData: any) {
+    const role = param.role;
+    const user = updatedData.user;
+
+    const updatedDocument = await this.userService.updateRole(role, user);
+
+    // console.log({ updatedDocument });
+
+    return res.status(HttpStatus.OK).json({ updatedDocument });
   }
 }

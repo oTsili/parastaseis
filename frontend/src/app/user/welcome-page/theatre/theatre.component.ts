@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TheatrePageService } from '../../theatre-page/theatre-page.service';
+import { TheatrePageService } from '../../pages/theatre-page/theatre-page.service';
 import { Subscription } from 'rxjs';
 import { CEvent } from '../../interfaces/event.interface';
 

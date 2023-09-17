@@ -31,7 +31,7 @@ const routes: Routes = [
   {
     path: 'theatre',
     loadChildren: () =>
-      import('./theatre-page/theatre-page.module').then(
+      import('./pages/theatre-page/theatre-page.module').then(
         (m) => m.TheatrePageModule
       ),
     data: {

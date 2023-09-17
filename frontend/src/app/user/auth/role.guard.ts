@@ -19,7 +19,6 @@ export class RoleGuard implements CanLoad {
     return new Observable<boolean>((observer) => {
       this.authService.isAdmin().subscribe({
         next: (response) => {
-          console.log({ response });
           // console.log({ response });
           // if authenticated the backend responses with the user object
           // trigger the true authentication status

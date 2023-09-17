@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CEvent } from '../../interfaces/event.interface';
-import { TheatrePageService } from '../../theatre-page/theatre-page.service';
+import { RecommendedPageService } from '../../pages/recommended-page/recommended-page.service';
 
 @Component({
   selector: 'app-recommended',
@@ -17,17 +17,19 @@ export class RecommendedComponent {
   eventsSubscription: Subscription;
   events: CEvent[];
 
-  constructor(private theatrePageService: TheatrePageService) {}
+  constructor(private recommendedPageService: RecommendedPageService) {}
 
   ngOnInit(): void {
-    this.eventsSubscription = this.theatrePageService.onGetEvents().subscribe({
-      next: (response) => {
-        this.events = response.events;
-      },
-      error: (error) => {
-        console.error(error.message.message);
-      },
-    });
+    this.eventsSubscription = this.recommendedPageService
+      .onGetEvents()
+      .subscribe({
+        next: (response) => {
+          this.events = response.events;
+        },
+        error: (error) => {
+          console.error(error.message.message);
+        },
+      });
   }
 
   // events = [

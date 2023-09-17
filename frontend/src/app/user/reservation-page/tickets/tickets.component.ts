@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Ticket } from '../../interfaces/Ticket.interface';
 import { CEvent } from '../../interfaces/event.interface';
 import { Subscription } from 'rxjs';
-import { TheatrePageService } from '../../theatre-page/theatre-page.service';
+import { TheatrePageService } from '../../pages/theatre-page/theatre-page.service';
 
 @Component({
   selector: 'app-tickets',

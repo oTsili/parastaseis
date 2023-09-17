@@ -3,7 +3,6 @@ import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -19,11 +18,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   isSubmitted: boolean;
   errorReturned = false;
 
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-    private cookieService: CookieService
-  ) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.theLoginForm = new FormGroup({
@@ -59,13 +54,11 @@ export class LoginComponent implements OnInit, OnDestroy {
           const user = response;
           this.authService.onUpdateAuthStatus(true);
 
-          const jwt = this.cookieService.get('jwt');
-          console.log({ jwt });
-
           localStorage.setItem(
             'userId',
             JSON.stringify(user._id).replaceAll('"', '')
           );
+
           this.router.navigate(['/']);
         },
         error: (error) => {

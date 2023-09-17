@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CEvent } from '../../interfaces/event.interface';
-import { TheatrePageService } from '../../theatre-page/theatre-page.service';
+import { MusicPageService } from '../../pages/music-page/music-page.service';
 
 @Component({
   selector: 'app-music',
@@ -17,10 +17,10 @@ export class MusicComponent {
   eventsSubscription: Subscription;
   events: CEvent[];
 
-  constructor(private theatrePageService: TheatrePageService) {}
+  constructor(private musicPageService: MusicPageService) {}
 
   ngOnInit(): void {
-    this.eventsSubscription = this.theatrePageService.onGetEvents().subscribe({
+    this.eventsSubscription = this.musicPageService.onGetEvents().subscribe({
       next: (response) => {
         this.events = response.events;
       },

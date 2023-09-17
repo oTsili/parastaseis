@@ -32,4 +32,20 @@ export class UserService {
     const user = await this.userModel.findOne({ username, password }).exec();
     return user;
   }
+
+  async findAllUsers(): Promise<any[] | null> {
+    const users = await this.userModel.find({}).lean();
+    const usersWithoutPasswword = users.map(
+      ({ password, passwordConfirm, ...user }) => user,
+    );
+    return usersWithoutPasswword;
+  }
+
+  async updateRole(role: string, user: User) {
+    return this.userModel.findByIdAndUpdate(
+      user._id,
+      { role },
+      { new: true }, // Return the updated document instead of the old one
+    );
+  }
 }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CEvent } from '../../interfaces/event.interface';
-import { TheatrePageService } from '../../theatre-page/theatre-page.service';
+import { PopularPageService } from '../../pages/popular-page/popular-page.service';
 
 @Component({
   selector: 'app-popular',
@@ -17,10 +17,10 @@ export class PopularComponent {
   eventsSubscription: Subscription;
   events: CEvent[];
 
-  constructor(private theatrePageService: TheatrePageService) {}
+  constructor(private popularPageService: PopularPageService) {}
 
   ngOnInit(): void {
-    this.eventsSubscription = this.theatrePageService.onGetEvents().subscribe({
+    this.eventsSubscription = this.popularPageService.onGetEvents().subscribe({
       next: (response) => {
         this.events = response.events;
       },

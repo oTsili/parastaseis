@@ -1,0 +1,38 @@
+<div class="container">
+  <table class="ui stripped table">
+    <thead>
+      <tr>
+        <th>FirsName</th>
+        <th>LastName</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.firstName }}</td>
+        <td>{{ user.lastName }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.role }}</td>
+        <td class="ui center aligned">
+          <button
+            *ngIf="user.role !== 'admin'"
+            class="ui large purple button my-button"
+            (click)="makeAdmin(user)"
+          >
+            Κάνε Διαχειριστή
+          </button>
+
+          <button
+            *ngIf="user.role === 'admin'"
+            class="ui large purple button my-button"
+            (click)="makeUser(user)"
+          >
+            Κάνε Χρήστη
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
