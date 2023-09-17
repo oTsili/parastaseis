@@ -6,7 +6,7 @@ import { CardListModule } from '../../shared/card-list/card-list.module';
 import { FooterModule } from '../../footer/footer.module';
 import { RouterModule } from '@angular/router';
 import { BreadcrumbModule } from '../../shared/breadcrumb/breadcrumb.module';
-import { TheatrePageRoutingModule } from './popular-page-routing.module';
+import { PopularPageRoutingModule } from './popular-page-routing.module';
 
 @NgModule({
   declarations: [PopularPageComponent],
@@ -16,7 +16,7 @@ import { TheatrePageRoutingModule } from './popular-page-routing.module';
     CardListModule,
     FooterModule,
     BreadcrumbModule,
-    TheatrePageRoutingModule,
+    PopularPageRoutingModule,
     RouterModule.forChild([
       {
         path: '',
@@ -26,4 +26,4 @@ import { TheatrePageRoutingModule } from './popular-page-routing.module';
     ]),
   ],
 })
-export class NewPageModule {}
+export class PopularPageModule {}

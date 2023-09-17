@@ -43,6 +43,60 @@ const routes: Routes = [
     },
   },
   {
+    path: 'music',
+    loadChildren: () =>
+      import('./pages/music-page/music-page.module').then(
+        (m) => m.MusicPageModule
+      ),
+    data: {
+      title: 'music',
+      breadcrumb: {
+        label: 'music',
+        url: 'music',
+      },
+    },
+  },
+  {
+    path: 'new',
+    loadChildren: () =>
+      import('./pages/new-page/new-page.module').then((m) => m.NewPageModule),
+    data: {
+      title: 'new',
+      breadcrumb: {
+        label: 'new',
+        url: 'new',
+      },
+    },
+  },
+  {
+    path: 'popular',
+    loadChildren: () =>
+      import('./pages/popular-page/popular-page.module').then(
+        (m) => m.PopularPageModule
+      ),
+    data: {
+      title: 'popular',
+      breadcrumb: {
+        label: 'popular',
+        url: 'popular',
+      },
+    },
+  },
+  {
+    path: 'recommended',
+    loadChildren: () =>
+      import('./pages/recommended-page/recommended-page.module').then(
+        (m) => m.RecommendedPageModule
+      ),
+    data: {
+      title: 'recommended',
+      breadcrumb: {
+        label: 'recommended',
+        url: 'recommended',
+      },
+    },
+  },
+  {
     path: 'login',
     loadChildren: () =>
       import('./login/login.module').then((m) => m.LoginModule),

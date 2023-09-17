@@ -4,9 +4,9 @@ import { CEvent } from '../../interfaces/event.interface';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-theatre-page',
-  templateUrl: './theatre-page.component.html',
-  styleUrls: ['./theatre-page.component.scss'],
+  selector: 'app-music-page',
+  templateUrl: './music-page.component.html',
+  styleUrls: ['./music-page.component.scss'],
 })
 export class MusicPageComponent implements OnInit {
   events: CEvent[];

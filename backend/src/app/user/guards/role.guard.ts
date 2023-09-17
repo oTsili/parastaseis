@@ -1,8 +1,14 @@
 // role.guard.ts
 
-import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
+import {
+  Injectable,
+  CanActivate,
+  ExecutionContext,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { AuthService } from '../auth.service';
+import { User } from '../schemas/user.schema';
 
 @Injectable()
 export class RoleGuard implements CanActivate {
@@ -17,8 +23,15 @@ export class RoleGuard implements CanActivate {
 
     // get the user from decoding the jwt payload
     const request = context.switchToHttp().getRequest();
-    const jwt = request.cookies['jwt'];
-    const user = this.authService.decodeJwt(jwt);
+    let user: User;
+    let jwt: string;
+
+    try {
+      jwt = request.cookies['jwt'];
+      user = this.authService.decodeJwt(jwt);
+    } catch {
+      throw new UnauthorizedException('jwt is not provided!');
+    }
 
     // const user = request.user; // Assuming you have saved the user to the req object after login
 

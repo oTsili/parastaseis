@@ -6,7 +6,7 @@ import { CardListModule } from '../../shared/card-list/card-list.module';
 import { FooterModule } from '../../footer/footer.module';
 import { RouterModule } from '@angular/router';
 import { BreadcrumbModule } from '../../shared/breadcrumb/breadcrumb.module';
-import { TheatrePageRoutingModule } from './music-page-routing.module';
+import { MusicPageRoutingModule } from './music-page-routing.module';
 
 @NgModule({
   declarations: [MusicPageComponent],
@@ -16,7 +16,7 @@ import { TheatrePageRoutingModule } from './music-page-routing.module';
     CardListModule,
     FooterModule,
     BreadcrumbModule,
-    TheatrePageRoutingModule,
+    MusicPageRoutingModule,
     RouterModule.forChild([
       {
         path: '',

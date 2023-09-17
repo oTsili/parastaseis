@@ -13,7 +13,10 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 interface MenuItem {
   label: string;
   isDropdownOpen: boolean;
-  subItems: { label: string }[];
+  subItems: {
+    label: string;
+    routerLink?: string;
+  }[];
 }
 
 @Component({
@@ -114,12 +117,29 @@ export class HeaderComponent implements OnInit, OnDestroy {
       ],
     },
     {
-      label: 'Menu 4',
+      label: 'Εκδηλώσεις',
       isDropdownOpen: false,
       subItems: [
-        { label: 'Option 4.1' },
-        { label: 'Option 4.2' },
-        { label: 'Option 4.3' },
+        {
+          label: 'Θέατρο',
+          routerLink: '/theatre',
+        },
+        {
+          label: 'Μουσική',
+          routerLink: '/music',
+        },
+        {
+          label: 'Νέα',
+          routerLink: '/new',
+        },
+        {
+          label: 'Προτεινόμενα',
+          routerLink: '/recommended',
+        },
+        {
+          label: 'Δημοφιλή',
+          routerLink: '/popular',
+        },
       ],
     },
   ];

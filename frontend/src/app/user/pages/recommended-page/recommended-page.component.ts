@@ -4,9 +4,9 @@ import { CEvent } from '../../interfaces/event.interface';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-popular-page',
-  templateUrl: './popular-page.component.html',
-  styleUrls: ['./popular-page.component.scss'],
+  selector: 'app-recommended-page',
+  templateUrl: './recommended-page.component.html',
+  styleUrls: ['./recommended-page.component.scss'],
 })
 export class RecommendedPageComponent implements OnInit {
   events: CEvent[];

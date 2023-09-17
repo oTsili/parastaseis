@@ -12,12 +12,15 @@
       >
         <span>{{ item.label }}</span>
         <ul class="menu transition">
-          <div *ngFor="let subItem of item.subItems" class="item">
+          <div
+            *ngFor="let subItem of item.subItems"
+            class="item link"
+            [routerLink]="subItem.routerLink"
+          >
             {{ subItem.label }}
           </div>
         </ul>
       </div>
-      <div class="item link" routerLink="/theatre">θέατρο</div>
       <div
         *ngIf="isAuthenticated$ | async"
         class="item link"

@@ -27,9 +27,9 @@ export class RoleGuard implements CanLoad {
         error: (response) => {
           // if not authenticated response with false
           // trigger the false authentication status
-          if (response.status === 401) {
+          if (response.status === 403 || response.status === 401) {
             // navigae to the home page
-            this.router.navigateByUrl('/login');
+            this.router.navigateByUrl('/');
 
             observer.next(false);
 

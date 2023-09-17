@@ -20,7 +20,11 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
         // If not found in header, try to get it from the cookie
         if (!token) {
-          return req.cookies['jwt'];
+          try {
+            return req.cookies['jwt'];
+          } catch {
+            throw new UnauthorizedException('jwt is not provided!');
+          }
         }
 
         return token;
