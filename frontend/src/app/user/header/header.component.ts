@@ -77,15 +77,24 @@ export class HeaderComponent implements OnInit, OnDestroy {
       },
       error: (error) => {
         console.error(error);
+        // this.authService.onUpdateAuthStatus(false);
+        // localStorage.removeItem('userId');
+        // console.log(this.isAuthenticated$);
       },
     });
-    this.router.navigate(['/login']);
+    // this.router.navigate(['/login']);
   }
 
   checkAuth() {
     this.authSubscription = this.authService
       .isAuthenticated()
-      .subscribe((response) => {});
+      .subscribe((response) => {
+        if (response) {
+          this.authService.onUpdateAuthStatus(true);
+        } else {
+          this.authService.onUpdateAuthStatus(false);
+        }
+      });
   }
 
   menuItems: MenuItem[] = [

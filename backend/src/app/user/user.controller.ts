@@ -55,9 +55,18 @@ export class UserController {
   }
 
   @Get('/logout')
-  async signout(@Res() res, @Session() session: Record<string, any>) {
-    session.jwt = null;
-    return await res.status(HttpStatus.OK).json();
+  async signout(
+    @Res() res,
+    @Req() req,
+    @Session() session: Record<string, any>,
+  ) {
+    // Clear the session (assuming you're using Express session middleware)
+    req.session = null;
+
+    // Clear the cookie
+    res.clearCookie('jwt');
+
+    return res.status(HttpStatus.OK).json({});
   }
 
   @Get('/all')

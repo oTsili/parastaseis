@@ -99,13 +99,13 @@ export class AuthService {
    * if the isAuthenticated is false, after reaching the backend
    */
   isAuthenticated() {
-    return this.httpClient.get<{
-      userId: string;
-      email: string;
+    return this.httpClient.get<{}>(
       // account: Account;
-    }>(`${BACKEND_URL}/isAuth`, {
-      withCredentials: true,
-    });
+      `${BACKEND_URL}/isAuth`,
+      {
+        withCredentials: true,
+      }
+    );
   }
 
   /**
