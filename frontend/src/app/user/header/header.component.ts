@@ -74,27 +74,23 @@ export class HeaderComponent implements OnInit, OnDestroy {
       next: (response) => {
         this.authService.onUpdateAuthStatus(false);
         localStorage.removeItem('userId');
+        this.router.navigateByUrl('/');
       },
       error: (error) => {
         console.error(error);
-        // this.authService.onUpdateAuthStatus(false);
-        // localStorage.removeItem('userId');
-        // console.log(this.isAuthenticated$);
       },
     });
     // this.router.navigate(['/login']);
   }
 
   checkAuth() {
-    this.authSubscription = this.authService
-      .isAuthenticated()
-      .subscribe((response) => {
-        if (response) {
-          this.authService.onUpdateAuthStatus(true);
-        } else {
-          this.authService.onUpdateAuthStatus(false);
-        }
-      });
+    this.authSubscription = this.authService.isAuth().subscribe((response) => {
+      if (response) {
+        this.authService.onUpdateAuthStatus(true);
+      } else {
+        this.authService.onUpdateAuthStatus(false);
+      }
+    });
   }
 
   menuItems: MenuItem[] = [

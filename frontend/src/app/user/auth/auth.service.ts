@@ -12,7 +12,7 @@ const BACKEND_URL = environment.BASE_URL + '/user';
   providedIn: 'root',
 })
 export class AuthService {
-  // private isAuthenticated: boolean = false;
+  private isAuthenticated: boolean = false;
   private token: string = '';
   isAuthenticated$ = new BehaviorSubject(false);
 
@@ -26,6 +26,7 @@ export class AuthService {
   onUpdateAuthStatus(status: boolean) {
     // console.log({ status });
     this.isAuthenticated$.next(status);
+    this.isAuthenticated = status;
   }
 
   onLogin(email: string, password: string) {
@@ -98,7 +99,7 @@ export class AuthService {
    * @returns User object if isAuthenticated is true or 401 error status
    * if the isAuthenticated is false, after reaching the backend
    */
-  isAuthenticated() {
+  isAuth() {
     return this.httpClient.get<{}>(
       // account: Account;
       `${BACKEND_URL}/isAuth`,
@@ -126,7 +127,7 @@ export class AuthService {
   //   return this.token;
   // }
 
-  // isLoggedIn(): boolean {
-  //   return this.isAuthenticated;
-  // }
+  isLoggedIn(): boolean {
+    return this.isAuthenticated;
+  }
 }

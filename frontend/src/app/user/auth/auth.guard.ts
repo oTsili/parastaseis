@@ -17,7 +17,7 @@ export class AuthGuard implements CanLoad {
     | boolean
     | UrlTree {
     return new Observable<boolean>((observer) => {
-      this.authService.isAuthenticated().subscribe({
+      this.authService.isAuth().subscribe({
         next: (response) => {
           // console.log({ response });
           // if authenticated the backend responses with the user object
