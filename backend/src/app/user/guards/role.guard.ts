@@ -34,7 +34,6 @@ export class RoleGuard implements CanActivate {
     }
 
     // const user = request.user; // Assuming you have saved the user to the req object after login
-
     // Check if the user has one of the required roles
     const hasRole = roles.some((role) => user.role.includes(role));
 

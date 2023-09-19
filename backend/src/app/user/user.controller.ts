@@ -96,6 +96,14 @@ export class UserController {
     return await res.status(HttpStatus.OK).json({});
   }
 
+  @UseGuards(JwtAuthGuard)
+  @UseGuards(RoleGuard)
+  @Roles('organizer', 'admin')
+  @Get('isOrganizer')
+  async validateOrganizer(@Req() req, @Res() res) {
+    return await res.status(HttpStatus.OK).json({});
+  }
+
   @Post('/shipping')
   async registerShipping(@Body() createShippingDto: CreateShippingDto) {
     const shipping = new this.userService.shippingModel(createShippingDto);

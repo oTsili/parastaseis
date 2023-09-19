@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './user/auth/auth.guard';
-import { RoleGuard } from './user/auth/role.guard';
+import { RoleAdminGuard } from './user/auth/role.admin.guard';
+import { RoleOrganizerGuard } from './user/auth/role.organizer.guard';
 
 const routes: Routes = [
   {
@@ -15,7 +15,7 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    canLoad: [RoleGuard],
+    canLoad: [RoleOrganizerGuard],
     loadChildren: () =>
       import('./admin/admin.module').then((m) => m.AdminModule),
   },

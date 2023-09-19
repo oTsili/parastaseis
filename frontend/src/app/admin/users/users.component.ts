@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from './users.service';
-import { User } from 'src/app/user/interfaces/user.interface';
+// import { User } from 'src/app/user/interfaces/user.interface';
 import { UserTotal } from '../../user/interfaces/user.interface';
 
 @Component({
@@ -16,8 +16,9 @@ export class UsersComponent implements OnInit {
     this.getUsers();
   }
 
-  makeAdmin(user: UserTotal) {
-    this.usersService.updateUser(user, 'admin').subscribe({
+  changeRole(user: UserTotal, role: string) {
+    console.log({ role });
+    this.usersService.updateUser(user, role).subscribe({
       next: (response) => {
         this.getUsers();
         // console.log({ response });
@@ -25,14 +26,16 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  makeUser(user: UserTotal) {
-    this.usersService.updateUser(user, 'user').subscribe({
-      next: (response) => {
-        this.getUsers();
-        // console.log({ response });
-      },
-    });
-  }
+  makeAdmin(user: UserTotal) {}
+
+  // makeUser(user: UserTotal) {
+  //   this.usersService.updateUser(user, 'user').subscribe({
+  //     next: (response) => {
+  //       this.getUsers();
+  //       // console.log({ response });
+  //     },
+  //   });
+  // }
 
   getUsers() {
     this.usersService.getUsers().subscribe({

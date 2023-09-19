@@ -18,7 +18,7 @@
         <i class="film icon"></i>
         Ταινίες
       </a> -->
-      <a routerLink="/admin/users" class="item">
+      <a *ngIf="userRole === 'admin'" routerLink="/admin/users" class="item">
         <i class="smile icon"></i>
         Χρήστες
       </a>

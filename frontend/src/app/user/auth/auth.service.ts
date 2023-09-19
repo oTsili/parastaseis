@@ -122,6 +122,19 @@ export class AuthService {
       withCredentials: true,
     });
   }
+  /**
+   * @returns User object if isAdmin is true or 401 error status
+   * if the isAuthenticated is false, after reaching the backend
+   */
+  isOrganizer() {
+    return this.httpClient.get<{
+      userId: string;
+      email: string;
+      // account: Account;
+    }>(`${BACKEND_URL}/isOrganizer`, {
+      withCredentials: true,
+    });
+  }
 
   // getAuthToken(): string {
   //   return this.token;

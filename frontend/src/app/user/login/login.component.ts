@@ -58,6 +58,10 @@ export class LoginComponent implements OnInit, OnDestroy {
             'userId',
             JSON.stringify(user._id).replaceAll('"', '')
           );
+          localStorage.setItem(
+            'userRole',
+            JSON.stringify(user.role).replaceAll('"', '')
+          );
 
           this.router.navigate(['/']);
         },

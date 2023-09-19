@@ -1,42 +1,28 @@
 import { Injectable } from '@angular/core';
-import { CanLoad, Route, Router, UrlSegment, UrlTree } from '@angular/router';
-import { map, Observable } from 'rxjs';
+import {
+  CanActivate,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+  UrlTree,
+  Router,
+} from '@angular/router';
 import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanLoad {
+export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
-  canLoad(
-    route: Route,
-    segments: UrlSegment[]
-  ):
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    | boolean
-    | UrlTree {
-    return new Observable<boolean>((observer) => {
-      this.authService.isAuth().subscribe({
-        next: (response) => {
-          // console.log({ response });
-          // if authenticated the backend responses with the user object
-          // trigger the true authentication status
-          observer.next(true);
-        },
-        error: (response) => {
-          // if not authenticated response with false
-          // trigger the false authentication status
-          if (response.status === 401) {
-            // navigae to the home page
-            this.router.navigateByUrl('/');
 
-            observer.next(false);
-
-            // prompt the login modal with error message
-          }
-        },
-      });
-    });
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): boolean | UrlTree {
+    if (this.authService.isLoggedIn()) {
+      return true;
+    } else {
+      // Redirect to login page if not authenticated
+      return this.router.parseUrl('/login');
+    }
   }
 }

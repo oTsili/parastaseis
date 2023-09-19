@@ -20,7 +20,7 @@ export class User {
   @Prop({ required: true })
   lastName: string;
 
-  @Prop({ type: String, enum: ['user', 'admin'], default: 'user' })
+  @Prop({ type: String, enum: ['user', 'admin', 'organizer'], default: 'user' })
   role: string;
 
   _id?: Types.ObjectId;

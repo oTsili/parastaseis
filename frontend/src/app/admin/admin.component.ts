@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../user/auth/auth.service';
 import { Router } from '@angular/router';
 
@@ -7,10 +7,14 @@ import { Router } from '@angular/router';
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.scss'],
 })
-export class AdminComponent {
+export class AdminComponent implements OnInit {
   isOpen = true;
-
+  userRole: string | null;
   constructor(private authService: AuthService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.userRole = localStorage.getItem('userRole');
+  }
 
   toggleVisibility() {
     this.isOpen = !this.isOpen;

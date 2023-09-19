@@ -6,7 +6,7 @@ import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root',
 })
-export class RoleGuard implements CanLoad {
+export class RoleOrganizerGuard implements CanLoad {
   constructor(private authService: AuthService, private router: Router) {}
   canLoad(
     route: Route,
@@ -17,7 +17,7 @@ export class RoleGuard implements CanLoad {
     | boolean
     | UrlTree {
     return new Observable<boolean>((observer) => {
-      this.authService.isAdmin().subscribe({
+      this.authService.isOrganizer().subscribe({
         next: (response) => {
           // console.log({ response });
           // if authenticated the backend responses with the user object
