@@ -3,7 +3,8 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding-left: 3%;
+  // padding-left: 3%;
+  width: min-content;
 }
 
 .hero-text {
@@ -24,4 +25,24 @@
 .ui.search {
   font-size: 1.6rem;
   margin-top: 3%;
+}
+
+/* mobile */
+@media only screen and (max-width: 768px) {
+  .hero-text-wrapper {
+    width: auto;
+    margin: 4%;
+  }
+}
+
+/* Tablet */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+}
+
+/* Small Monitor */
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+}
+
+/* Large Monitor */
+@media only screen and (min-width: 1200px) {
 }

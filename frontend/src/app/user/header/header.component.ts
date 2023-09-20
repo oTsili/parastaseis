@@ -28,6 +28,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isAuthenticated$: BehaviorSubject<boolean>;
   authSubscription: Subscription;
   userFirstName = localStorage.getItem('firstName');
+  isOpen = false;
+  isVisible = false;
 
   constructor(
     private authService: AuthService,
@@ -44,7 +46,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.authSubscription.unsubscribe();
   }
-  isOpen = false;
 
   @HostListener('document:click', ['$event.target'])
   onClickOutside(targetElement: any) {

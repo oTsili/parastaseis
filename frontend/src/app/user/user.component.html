@@ -2,8 +2,10 @@
   <app-header></app-header>
   <app-hero></app-hero>
 </section>
-<app-secondary-header></app-secondary-header>
+
+<app-secondary-header *ngIf="!isSmallScreen"></app-secondary-header>
 <section id="popular">
+  <app-secondary-header *ngIf="isSmallScreen"></app-secondary-header>
   <app-popular></app-popular>
 </section>
 <section id="recommended">

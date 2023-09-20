@@ -12,9 +12,10 @@ app-hero-text {
 
 /* mobile */
 @media only screen and (max-width: 768px) {
-  // .hero {
-  //   flex-direction: column;
-  // }
+  .hero {
+    display: block;
+    margin: 4%;
+  }
 }
 
 /* Tablet */

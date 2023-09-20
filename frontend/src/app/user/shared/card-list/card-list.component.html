@@ -1,5 +1,8 @@
-<div class="ui grid">
-  <div class="four wide column" *ngFor="let event of events">
+<div class="ui stackable grid">
+  <div
+    class="four wide mobile six wide tablet four wide computer column"
+    *ngFor="let event of events"
+  >
     <div class="ui card" (click)="navigateToLink(event)">
       <div class="image">
         <img [src]="event.simpleImage" />
