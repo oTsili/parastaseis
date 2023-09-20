@@ -24,13 +24,37 @@ import { Subscription } from 'rxjs';
       ),
       transition('void => slide-in', [
         style({ transform: 'translateX(-100%)' }),
-        animate('500ms ease-in'),
+        animate(
+          '800ms cubic-bezier(0.25, 0.8, 0.25, 1)',
+          style({ transform: 'translateX(0)' })
+        ),
       ]),
       transition('slide-in => void', [
-        animate('500ms ease-out', style({ transform: 'translateX(100%)' })),
+        animate(
+          '800ms cubic-bezier(0.25, 0.8, 0.25, 1)',
+          style({ transform: 'translateX(100%)' })
+        ),
       ]),
     ]),
   ],
+
+  // animations: [
+  //   trigger('carouselAnimation', [
+  //     state(
+  //       'slide-in',
+  //       style({
+  //         transform: 'translateX(0)',
+  //       })
+  //     ),
+  //     transition('void => slide-in', [
+  //       style({ transform: 'translateX(-100%)' }),
+  //       animate('500ms ease-in'),
+  //     ]),
+  //     transition('slide-in => void', [
+  //       animate('500ms ease-out', style({ transform: 'translateX(100%)' })),
+  //     ]),
+  //   ]),
+  // ],
   // animations: [
   //   trigger('carouselAnimation', [
   //     transition('void => *', [
@@ -66,18 +90,35 @@ export class CustomCarouselComponent {
   }
 
   onNextClick() {
-    const next = this.currentSlide + 1;
-    this.currentSlide = next === this.slides.length ? 0 : next;
+    this.currentSlide = (this.currentSlide + 1) % this.slides.length;
   }
 
   slideShow() {
-    this.intervalId = setInterval(() => {
+    setInterval(() => {
       this.onNextClick();
+      this.preloadNextImage(); // Preload the next image
     }, 3000);
-    // setInterval(() => {
-    //   this.currentSlide = (this.currentSlide + 1) % this.slides.length;
-    // }, 3000);
   }
+
+  preloadNextImage() {
+    const nextSlide = (this.currentSlide + 1) % this.slides.length;
+    const image = new Image();
+    image.src = this.slides[nextSlide].src;
+  }
+
+  // onNextClick() {
+  //   const next = this.currentSlide + 1;
+  //   this.currentSlide = next === this.slides.length ? 0 : next;
+  // }
+
+  // slideShow() {
+  //   this.intervalId = setInterval(() => {
+  //     this.onNextClick();
+  //   }, 3000);
+  //   // setInterval(() => {
+  //   //   this.currentSlide = (this.currentSlide + 1) % this.slides.length;
+  //   // }, 3000);
+  // }
 
   stopSlideShow() {
     clearInterval(this.intervalId!);

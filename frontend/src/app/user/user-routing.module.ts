@@ -19,7 +19,7 @@ const routes: Routes = [
   // },
   {
     path: 'mytickets',
-    canLoad: [AuthGuard],
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import('./mytickets/mytickets.module').then((m) => m.MyticketsModule),
     data: {

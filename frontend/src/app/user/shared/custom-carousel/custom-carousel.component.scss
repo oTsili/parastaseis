@@ -81,6 +81,19 @@
   transform: scale(1.025);
 }
 
+.slideshow {
+  overflow: hidden;
+  width: 100%;
+  max-width: 800px; /* Adjust as needed */
+  margin: 0 auto;
+}
+
+.slide {
+  width: 100%;
+  height: auto;
+  transition: transform 0.5s ease-in-out; /* Adjust duration and easing as needed */
+}
+
 // =========================
 // Next and Prev buttons
 // =========================
