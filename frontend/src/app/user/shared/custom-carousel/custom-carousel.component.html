@@ -1,16 +1,14 @@
 <div class="carousel-wrapper">
   <div class="carousel-background"></div>
   <div class="carousel slideshow">
-    <ng-container *ngFor="let slide of slides; let i = index">
-      <img
-        *ngIf="i === currentSlide"
-        [src]="slide.src"
-        class="slide"
-        [@carouselAnimation]
-        (mouseover)="stopSlideShow()"
-        (mouseout)="slideShow()"
-      />
-    </ng-container>
+    <img
+      class="slide"
+      [src]="slides[currentSlide]"
+      alt="Slide"
+      [@carouselAnimation]
+      (mouseover)="stopSlideShow()"
+      (mouseout)="slideShow()"
+    />
 
     <button class="ui icon button left" (click)="onPreviousClick()">
       <i class="chevron circle left icon"></i>

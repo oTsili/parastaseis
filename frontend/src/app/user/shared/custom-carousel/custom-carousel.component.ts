@@ -66,7 +66,7 @@ import { Subscription } from 'rxjs';
   // ],
 })
 export class CustomCarouselComponent {
-  @Input() slides: { src: string }[] = [];
+  @Input() slides: string[] = [];
   intervalId: NodeJS.Timer | null = null;
   isLoading = false;
   currentSlide = 0;
@@ -94,7 +94,7 @@ export class CustomCarouselComponent {
   }
 
   slideShow() {
-    setInterval(() => {
+    this.intervalId = setInterval(() => {
       this.onNextClick();
       this.preloadNextImage(); // Preload the next image
     }, 3000);
@@ -103,7 +103,7 @@ export class CustomCarouselComponent {
   preloadNextImage() {
     const nextSlide = (this.currentSlide + 1) % this.slides.length;
     const image = new Image();
-    image.src = this.slides[nextSlide].src;
+    image.src = this.slides[nextSlide];
   }
 
   // onNextClick() {
@@ -125,6 +125,7 @@ export class CustomCarouselComponent {
     this.intervalId = null;
   }
 
+  // if it has to be get by the backend server
   preloadImages() {
     this.isLoading = true;
     // this.carouselSlidesSubscription = this.customCarouselService
