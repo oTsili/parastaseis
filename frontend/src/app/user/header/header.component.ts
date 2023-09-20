@@ -27,6 +27,7 @@ interface MenuItem {
 export class HeaderComponent implements OnInit, OnDestroy {
   isAuthenticated$: BehaviorSubject<boolean>;
   authSubscription: Subscription;
+  userFirstName = localStorage.getItem('firstName');
 
   constructor(
     private authService: AuthService,
@@ -113,15 +114,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         { label: 'Option 2.3' },
       ],
     },
-    {
-      label: 'Menu 3',
-      isDropdownOpen: false,
-      subItems: [
-        { label: 'Option 3.1' },
-        { label: 'Option 3.2' },
-        { label: 'Option 3.3' },
-      ],
-    },
+
     {
       label: 'Εκδηλώσεις',
       isDropdownOpen: false,

@@ -4,6 +4,10 @@
   box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.075);
 }
 
+.ui.menu .item {
+  padding-right: 25%;
+}
+
 .ui.menu .item:before {
   content: none;
   // width: 0;

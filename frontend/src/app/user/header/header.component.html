@@ -21,14 +21,7 @@
           </div>
         </ul>
       </div>
-      <div
-        *ngIf="isAuthenticated$ | async"
-        class="item link"
-        routerLink="/mytickets"
-        routerLinkActive="active"
-      >
-        Τα εσιτήρια μου
-      </div>
+
       <div
         *ngIf="!(isAuthenticated$ | async)"
         class="item link"
@@ -39,11 +32,31 @@
       </div>
       <div
         *ngIf="isAuthenticated$ | async"
+        class="ui dropdown link item marginRight"
+        appDropdown
+        [dropdownVisible]="false"
+      >
+        <span>{{ userFirstName }}</span>
+        <ul class="menu transition">
+          <div
+            class="item link"
+            routerLink="/mytickets"
+            routerLinkActive="active"
+          >
+            Τα εσιτήρια μου
+          </div>
+          <div class="item link" routerLink="/logout" (click)="logout()">
+            Logout
+          </div>
+        </ul>
+      </div>
+      <!-- <div
+        *ngIf="isAuthenticated$ | async"
         class="item link"
         (click)="logout()"
       >
         Logout
-      </div>
+      </div> -->
       <div
         *ngIf="!(isAuthenticated$ | async)"
         class="item link"

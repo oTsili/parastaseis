@@ -59,6 +59,10 @@ export class LoginComponent implements OnInit, OnDestroy {
             JSON.stringify(user._id).replaceAll('"', '')
           );
           localStorage.setItem(
+            'firstName',
+            JSON.stringify(user.firstName).replaceAll('"', '')
+          );
+          localStorage.setItem(
             'userRole',
             JSON.stringify(user.role).replaceAll('"', '')
           );
