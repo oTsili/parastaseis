@@ -17,7 +17,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   signupDate: string;
   signupSubscription: Subscription;
   isSubmitted: boolean;
-
+  errorReturned = false;
   constructor(
     private appService: AppService,
     private authService: AuthService,
@@ -79,9 +79,24 @@ export class SignupComponent implements OnInit, OnDestroy {
     this.signupSubscription = this.authService.onSignup(user).subscribe(
       {
         next: (response) => {
-          // this.authService.onUpdateAuthStatus(true);
+          this.errorReturned = false;
+          const user: any = response;
+          this.authService.onUpdateAuthStatus(true);
+
+          localStorage.setItem(
+            'userId',
+            JSON.stringify(user._id).replaceAll('"', '')
+          );
+          localStorage.setItem(
+            'firstName',
+            JSON.stringify(user.firstName).replaceAll('"', '')
+          );
+          localStorage.setItem(
+            'userRole',
+            JSON.stringify(user.role).replaceAll('"', '')
+          );
+
           this.router.navigate(['/']);
-          // this.userAppService.onToggleModal();
         },
         error: (error) => {
           console.error(error);

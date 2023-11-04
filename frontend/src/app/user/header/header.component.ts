@@ -97,24 +97,24 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   menuItems: MenuItem[] = [
-    {
-      label: 'Menu 1',
-      isDropdownOpen: false,
-      subItems: [
-        { label: 'Option 1.1' },
-        { label: 'Option 1.2' },
-        { label: 'Option 1.3' },
-      ],
-    },
-    {
-      label: 'Menu 2',
-      isDropdownOpen: false,
-      subItems: [
-        { label: 'Option 2.1' },
-        { label: 'Option 2.2' },
-        { label: 'Option 2.3' },
-      ],
-    },
+    // {
+    //   label: 'Menu 1',
+    //   isDropdownOpen: false,
+    //   subItems: [
+    //     { label: 'Option 1.1' },
+    //     { label: 'Option 1.2' },
+    //     { label: 'Option 1.3' },
+    //   ],
+    // },
+    // {
+    //   label: 'Menu 2',
+    //   isDropdownOpen: false,
+    //   subItems: [
+    //     { label: 'Option 2.1' },
+    //     { label: 'Option 2.2' },
+    //     { label: 'Option 2.3' },
+    //   ],
+    // },
 
     {
       label: 'Εκδηλώσεις',

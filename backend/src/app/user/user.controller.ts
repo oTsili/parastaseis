@@ -12,6 +12,7 @@ import {
   UseGuards,
   UnauthorizedException,
   Put,
+  Delete,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
@@ -141,6 +142,18 @@ export class UserController {
     const user = updatedData.user;
 
     const updatedDocument = await this.userService.updateRole(role, user);
+
+    // console.log({ updatedDocument });
+
+    return res.status(HttpStatus.OK).json({ updatedDocument });
+  }
+
+  @Delete('/:userId')
+  async deleteUser(@Param() param, @Res() res, @Body() updatedData: any) {
+    const userId = param.userId;
+    // console.log({ userId });
+
+    const updatedDocument = await this.userService.deleteUser(userId);
 
     // console.log({ updatedDocument });
 

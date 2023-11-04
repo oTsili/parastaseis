@@ -17,8 +17,18 @@ export class UsersComponent implements OnInit {
   }
 
   changeRole(user: UserTotal, role: string) {
-    console.log({ role });
+    // console.log({ role });
     this.usersService.updateUser(user, role).subscribe({
+      next: (response) => {
+        this.getUsers();
+        // console.log({ response });
+      },
+    });
+  }
+
+  deleteUser(user: UserTotal) {
+    // console.log({ user });
+    this.usersService.deleteUser(user).subscribe({
       next: (response) => {
         this.getUsers();
         // console.log({ response });

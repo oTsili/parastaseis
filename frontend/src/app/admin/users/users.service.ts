@@ -26,4 +26,11 @@ export class UsersService {
       }
     );
   }
+
+  deleteUser(user: UserTotal) {
+    // console.log(user);
+    return this.httpClient.delete<any>(`${BACKEND_URL}/${user._id}`, {
+      withCredentials: true,
+    });
+  }
 }

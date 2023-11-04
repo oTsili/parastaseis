@@ -48,4 +48,8 @@ export class UserService {
       { new: true }, // Return the updated document instead of the old one
     );
   }
+
+  async deleteUser(id): Promise<any> {
+    return await this.userModel.findByIdAndRemove(id);
+  }
 }
